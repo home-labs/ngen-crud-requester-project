@@ -1,0 +1,9 @@
+{
+  "name": "ngen-restful-crud",
+  "version": "1.0.0-rc.0",
+  "peerDependencies": {
+    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
+    "ngen-pattern": "^1.0.0"
+  }
+}

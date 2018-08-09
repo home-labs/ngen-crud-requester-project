@@ -121,6 +121,46 @@
           }
         }
       }
+    },
+    "ngen-restful-crud": {
+      "root": "projects/ngen-restful-crud",
+      "sourceRoot": "projects/ngen-restful-crud/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngen-restful-crud/tsconfig.lib.json",
+            "project": "projects/ngen-restful-crud/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/ngen-restful-crud/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngen-restful-crud/src/test.ts",
+            "tsConfig": "projects/ngen-restful-crud/tsconfig.spec.json",
+            "karmaConfig": "projects/ngen-restful-crud/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngen-restful-crud/tsconfig.lib.json",
+              "projects/ngen-restful-crud/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngen-restful-crud-project"
