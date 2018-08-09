@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 
-import { GenericAbstractFactory } from './generic-abstract-factory';
-import { GenericFactoryClient } from './generic-factory-client';
+import { NGenPattern } from 'ngen-pattern';
 import { GenericAbstractProduct } from './generic-abstract-product';
 
 import { StrategyContexts } from './strategies/contexts';
 import { Strategies } from './strategies';
 
-export abstract class GenericAbstractService<T> implements GenericAbstractFactory<T> {
 
-  private factoryClient: GenericFactoryClient<T>;
+export abstract class GenericAbstractService<T> implements NGenPattern.Creational.AbstractFactory.GenericAbstractFactory<T> {
+
+  private factoryClient: NGenPattern.Creational.AbstractFactory.GenericFactoryClient<T>;
 
   private getStrategyContext: StrategyContexts.Search;
   private postStrategyContext: StrategyContexts.Send;
@@ -20,7 +20,7 @@ export abstract class GenericAbstractService<T> implements GenericAbstractFactor
   constructor(
     private http: HttpClient
   ) {
-    this.factoryClient = new GenericFactoryClient(this);
+    this.factoryClient = new NGenPattern.Creational.AbstractFactory.GenericFactoryClient(this);
 
     this.getStrategyContext = new StrategyContexts.Search(new Strategies.Search.Get(http));
     this.postStrategyContext = new StrategyContexts.Send(new Strategies.Send.Post(http));
@@ -51,7 +51,7 @@ export abstract class GenericAbstractService<T> implements GenericAbstractFactor
     return this.postStrategyContext.send(url, data, options);
   }
 
-  protected getMember(url: string, options?): Promise<GenericAbstractProduct<T>> {
+  protected getMember(url: string, options?): Promise<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T>> {
     return new Promise((accomplish, reject) => {
       this.getStrategyContext.search(url, options)
         .then((r: Response) => {
@@ -63,7 +63,7 @@ export abstract class GenericAbstractService<T> implements GenericAbstractFactor
     });
   }
 
-  protected get(url: string, options?): Promise<Array<GenericAbstractProduct<T>>> {
+  protected get(url: string, options?): Promise<Array<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T>>> {
     return new Promise((accomplish, reject) => {
       this.getStrategyContext.search(url, options)
         .then((r: Response) => {
@@ -93,7 +93,7 @@ export abstract class GenericAbstractService<T> implements GenericAbstractFactor
     });
   }
 
-  protected searchCollection(url: string, data: Object, options?): Promise<Array<GenericAbstractProduct<T>>> {
+  protected searchCollection(url: string, data: Object, options?): Promise<Array<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T>>> {
     return this.get(this.composeURLQuery(url, data), options);
   }
 
