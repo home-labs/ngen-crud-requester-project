@@ -12,4 +12,4 @@ import { NgModule } from '@angular/core';
 
     ]
 })
-export class Module { }
+export class NGenRESTfulCRUDModule { }
