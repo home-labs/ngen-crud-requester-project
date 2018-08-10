@@ -1,7 +1,6 @@
 import { GenericAbstractProduct } from "./generic-abstract-product";
 
-
-export abstract class AbstractRelationalModel implements GenericAbstractProduct<AbstractRelationalModel> {
+export abstract class GenericAbstractRelationalModel<T> implements GenericAbstractProduct<T> {
 
     private id: number;
 
@@ -13,8 +12,6 @@ export abstract class AbstractRelationalModel implements GenericAbstractProduct<
         return this.id;
     }
 
-    getConcrete(): AbstractRelationalModel {
-        return this;
-    }
+    abstract getConcrete(): T;
 
 }
