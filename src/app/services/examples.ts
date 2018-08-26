@@ -19,13 +19,13 @@ export class Examples extends NGenRESTfulCRUD.AbstractService {
         `, data, options);
     }
 
-    read(id: number, options?): Promise<Response> {
+    read(id: number, options?): Promise<any> {
         return super.get(`
 
         `, options);
     }
 
-    search(data: Object, options?): Promise<Response> {
+    search(data: Object, options?): Promise<any> {
         return super.search(`
 
         `, data, options);
