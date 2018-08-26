@@ -40,7 +40,7 @@ export abstract class GenericAbstractService<T>
         return new Promise(
             (accomplish, reject) => {
                 super.search(url, data, options).then(
-                    (r: Response) => {
+                    (r: Array<Object>) => {
                         accomplish(this.factoryClient.manufactureCollection(r));
                     }
                 ).catch(

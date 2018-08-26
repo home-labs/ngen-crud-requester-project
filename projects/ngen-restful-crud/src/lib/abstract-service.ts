@@ -43,7 +43,7 @@ export abstract class AbstractService {
         return this.postStrategyContext.send(url, data, options);
     }
 
-    protected get(url: string, options?): Promise<Object> {
+    protected get(url: string, options?): Promise<Response> {
         return new Promise((accomplish, reject) => {
             this.getStrategyContext.search(url, options)
                 .then((r: Response) => {
@@ -54,8 +54,19 @@ export abstract class AbstractService {
         });
     }
 
-    protected search(url: string, data: Object, options?): Promise<Object> {
-        return this.get(this.composeURLQuery(url, data), options);
+    protected search(url: string, data: Object, options?): Promise<Array<Object>> {
+        return new Promise((accomplish, reject) => {
+            this.getStrategyContext.search(this.composeURLQuery(url, data), options)
+                .then((r) => {
+                    if (r instanceof Array) {
+                        accomplish(r);
+                    } else {
+                        accomplish([r]);
+                    }
+                }).catch((e) => {
+                    reject(e);
+                });
+        });
     }
 
     protected patch(url: string, data: Object, options?): Promise<Response> {
