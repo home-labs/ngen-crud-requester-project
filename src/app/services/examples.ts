@@ -25,7 +25,7 @@ export class Examples extends NGenRESTfulCRUD.AbstractService {
         `, options);
     }
 
-    search(data: Object, options?): Promise<any> {
+    search(data: Object, options?): Promise<Object> {
         return super.search(`
 
         `, data, options);

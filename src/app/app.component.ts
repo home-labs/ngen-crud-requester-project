@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+import { Services } from './services/namespace';
+
+
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -8,5 +11,20 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
     title = 'app';
+    collection: Array<Object>;
+
+    constructor(
+        private examplesService: Services.Examples
+    ) {
+        examplesService.search({}).then(
+            (r: Array<Object>) => {
+                this.collection = r;
+            }
+        ).catch(
+            (e) => {
+                console.log(e);
+            }
+        );
+    }
 
 }
