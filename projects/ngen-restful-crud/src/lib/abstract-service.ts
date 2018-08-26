@@ -39,7 +39,7 @@ export abstract class AbstractService {
         return composed;
     }
 
-    protected post(url: string, data: Object, options?): Promise<Response> {
+    protected create(url: string, data: Object, options?): Promise<Response> {
         return this.postStrategyContext.send(url, data, options);
     }
 
@@ -66,7 +66,7 @@ export abstract class AbstractService {
         return this.putStrategyContext.send(url, data, options);
     }
 
-    protected delete(url: string, options?): Promise<Response> {
+    protected destroy(url: string, options?): Promise<Response> {
         return new Promise((accomplish, reject) => {
             this.deleteStrategyContext.search(url, options)
                 .then((r: Response) => {

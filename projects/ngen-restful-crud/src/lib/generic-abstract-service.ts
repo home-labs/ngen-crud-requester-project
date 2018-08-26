@@ -21,7 +21,7 @@ export abstract class GenericAbstractService<T>
 
     abstract manufacture(response: Response): GenericAbstractProduct<T>;
 
-    protected getProduct(url: string, options?): Promise<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T>> {
+    protected readProduct(url: string, options?): Promise<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T>> {
 
         return new Promise((accomplish, reject) => {
             super.get(url, options).then(
