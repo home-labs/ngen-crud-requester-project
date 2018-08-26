@@ -1,2 +1,3 @@
-import * as Send from './module';
-export { Send };
+export { Post } from './post';
+export { Patch } from './patch';
+export { Put } from './put';

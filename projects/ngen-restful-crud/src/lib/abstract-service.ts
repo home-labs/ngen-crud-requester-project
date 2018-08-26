@@ -1,26 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 
-import { StrategyContexts } from './strategies/contexts';
-import { Strategies } from './strategies';
+import { Strategies } from './strategies/namespace';
 
 
 export abstract class AbstractService {
 
-    protected getStrategyContext: StrategyContexts.Search;
-    private postStrategyContext: StrategyContexts.Send;
-    private patchStrategyContext: StrategyContexts.Send;
-    private putStrategyContext: StrategyContexts.Send;
-    private deleteStrategyContext: StrategyContexts.Search;
+    protected getStrategyContext: Strategies.Contexts.Search;
+    private postStrategyContext: Strategies.Contexts.Send;
+    private patchStrategyContext: Strategies.Contexts.Send;
+    private putStrategyContext: Strategies.Contexts.Send;
+    private deleteStrategyContext: Strategies.Contexts.Search;
 
     constructor(
         private http: HttpClient
     ) {
 
-        this.getStrategyContext = new StrategyContexts.Search(new Strategies.Search.Get(http));
-        this.postStrategyContext = new StrategyContexts.Send(new Strategies.Send.Post(http));
-        this.patchStrategyContext = new StrategyContexts.Send(new Strategies.Send.Patch(http));
-        this.putStrategyContext = new StrategyContexts.Send(new Strategies.Send.Put(http));
-        this.deleteStrategyContext = new StrategyContexts.Search(new Strategies.Search.Delete(http));
+        this.getStrategyContext = new Strategies.Contexts.Search(new Strategies.Search.Get(http));
+        this.postStrategyContext = new Strategies.Contexts.Send(new Strategies.Send.Post(http));
+        this.patchStrategyContext = new Strategies.Contexts.Send(new Strategies.Send.Patch(http));
+        this.putStrategyContext = new Strategies.Contexts.Send(new Strategies.Send.Put(http));
+        this.deleteStrategyContext = new Strategies.Contexts.Search(new Strategies.Search.Delete(http));
     }
 
     private composeURLQuery(url: string, data: Object): string {

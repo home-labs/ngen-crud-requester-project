@@ -1,2 +1,2 @@
-import * as Search from './module';
-export { Search };
+export { Get } from './get';
+export { Delete } from './delete';
