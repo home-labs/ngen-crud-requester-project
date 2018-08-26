@@ -5,7 +5,7 @@ import { Strategies } from './strategies/namespace';
 
 export abstract class AbstractService {
 
-    protected getStrategyContext: Strategies.Contexts.Search;
+    private getStrategyContext: Strategies.Contexts.Search;
     private postStrategyContext: Strategies.Contexts.Send;
     private patchStrategyContext: Strategies.Contexts.Send;
     private putStrategyContext: Strategies.Contexts.Send;
@@ -26,6 +26,7 @@ export abstract class AbstractService {
         let
             composed = '';
 
+        // check url doesn't have query params before
         Object.keys(data).forEach((k) => {
             if (data[k]) {
                 composed += `${k}=${data[k]}&`;
