@@ -19,13 +19,13 @@ export abstract class GenericAbstractService<T>
         this.factoryClient = new NGenPattern.Creational.AbstractFactory.GenericFactoryClient(this);
     }
 
-    abstract manufacture(response: Response): GenericAbstractProduct<T>;
+    abstract manufacture(object: Object): GenericAbstractProduct<T>;
 
     protected readProduct(url: string, options?): Promise<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T>> {
 
         return new Promise((accomplish, reject) => {
             super.get(url, options).then(
-                (r: Response) => {
+                (r: Object) => {
                     accomplish(this.factoryClient.manufacture(r));
                 }
             ).catch(
