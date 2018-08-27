@@ -19,13 +19,13 @@ export class Examples extends NGenRESTfulCRUD.AbstractService {
         `, data, options);
     }
 
-    read(id: number, options?): Promise<any> {
+    read(id: number, options?): Promise<Object> {
         return super.get(`
 
         `, options);
     }
 
-    search(data: Object, options?): Promise<Object> {
+    search(data: Object, options?): Promise<Array<Object>> {
         return super.search(`
 
         `, data, options);
@@ -38,7 +38,7 @@ export class Examples extends NGenRESTfulCRUD.AbstractService {
         `, data, options);
     }
 
-    delete(id: number, options?: Object): Promise<Response> {
+    delete(id: number, options?: Object): Promise<Object> {
         return super.destroy(`
 
         `, options);
