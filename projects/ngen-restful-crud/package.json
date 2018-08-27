@@ -4,6 +4,6 @@
   "peerDependencies": {
     "@angular/common": ">=5.0.0",
     "@angular/core": ">=5.0.0",
-    "ngen-pattern": "^1.0.0"
+    "ngen-pattern": "^1.1.0"
   }
 }
