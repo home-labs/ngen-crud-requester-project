@@ -22,14 +22,14 @@ export abstract class AbstractService {
         this.deleteStrategyContext = new Strategies.Contexts.Search(new Strategies.Search.Delete(http));
     }
 
-    private composeURLQuery(url: string, data: Object): string {
+    private composeURLQuery(url: string, params: Object): string {
         let
             composed = '';
 
         // check url doesn't have query params before
-        Object.keys(data).forEach((k) => {
-            if (data[k]) {
-                composed += `${k}=${data[k]}&`;
+        Object.keys(params).forEach((k) => {
+            if (params[k]) {
+                composed += `${k}=${params[k]}&`;
             }
         });
 
@@ -47,10 +47,10 @@ export abstract class AbstractService {
         return this.getStrategyContext.search(url, options);
     }
 
-    protected search(url: string, data: Object, options?): Promise<Array<Object>> {
+    protected search(url: string, params: Object, options?): Promise<Array<Object>> {
         return new Promise((accomplish, reject) => {
             this.getStrategyContext
-                .search(this.composeURLQuery(url, data), options)
+                .search(this.composeURLQuery(url, params), options)
                 .then(
                     (r: Object) => {
                         if (r instanceof Array) {
