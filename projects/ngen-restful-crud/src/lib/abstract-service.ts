@@ -26,15 +26,19 @@ export abstract class AbstractService {
         let
             composed = '';
 
-        // check url doesn't have query params before
         Object.keys(params).forEach((k) => {
             if (params[k]) {
-                composed += `${k}=${params[k]}&`;
+                composed += `${k}=${encodeURI(params[k])}&`;
             }
         });
 
         composed = composed.slice(0, composed.length - 1);
-        composed = `${url}?${encodeURI(composed)}`;
+
+        if (url[url.length - 1] == '?') {
+            composed = `${url}&${composed}`;
+        } else {
+            composed = `${url}?${composed}`;
+        }
 
         return composed;
     }
