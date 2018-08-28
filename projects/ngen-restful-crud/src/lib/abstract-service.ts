@@ -22,6 +22,10 @@ export abstract class AbstractService {
         this.deleteStrategyContext = new Strategies.Contexts.Search(new Strategies.Search.Delete(http));
     }
 
+    private resolveURL(url: string) {
+        return url.trim().replace(/[\n]+/, '');
+    }
+
     private composeURLQuery(url: string, params: Object): string {
         let
             composed = '';
@@ -34,8 +38,6 @@ export abstract class AbstractService {
 
         composed = composed.slice(0, composed.length - 1);
 
-        url = url.trim().replace(/[\n]+/, '');
-
         if (url[url.length - 1] == '?') {
             composed = `${url}&${composed}`;
         } else {
@@ -46,17 +48,17 @@ export abstract class AbstractService {
     }
 
     protected create(url: string, data: Object, options?): Promise<Response> {
-        return this.postStrategyContext.send(url, data, options);
+        return this.postStrategyContext.send(this.resolveURL(url), data, options);
     }
 
     protected get(url: string, options?): Promise<Object> {
-        return this.getStrategyContext.search(url, options);
+        return this.getStrategyContext.search(this.resolveURL(url), options);
     }
 
     protected search(url: string, params: Object, options?): Promise<Array<Object>> {
         return new Promise((accomplish, reject) => {
             this.getStrategyContext
-                .search(this.composeURLQuery(url, params), options)
+                .search(this.composeURLQuery(this.resolveURL(url), params), options)
                 .then(
                     (r: Object) => {
                         if (r instanceof Array) {
@@ -74,15 +76,15 @@ export abstract class AbstractService {
     }
 
     protected patch(url: string, data: Object, options?): Promise<Response> {
-        return this.patchStrategyContext.send(url, data, options);
+        return this.patchStrategyContext.send(this.resolveURL(url), data, options);
     }
 
     protected put(url: string, data: Object, options?): Promise<Response> {
-        return this.putStrategyContext.send(url, data, options);
+        return this.putStrategyContext.send(this.resolveURL(url), data, options);
     }
 
     protected destroy(url: string, options?): Promise<Object> {
-        return this.deleteStrategyContext.search(url, options);
+        return this.deleteStrategyContext.search(this.resolveURL(url), options);
     }
 
 }
