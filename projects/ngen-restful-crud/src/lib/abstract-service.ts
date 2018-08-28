@@ -34,6 +34,8 @@ export abstract class AbstractService {
 
         composed = composed.slice(0, composed.length - 1);
 
+        url = url.trim().replace(/[\n]+/, '');
+
         if (url[url.length - 1] == '?') {
             composed = `${url}&${composed}`;
         } else {
