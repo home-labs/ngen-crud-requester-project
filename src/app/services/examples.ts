@@ -25,10 +25,10 @@ export class Examples extends NGenRESTfulCRUD.AbstractService {
         `, options);
     }
 
-    search(data: Object, options?): Promise<Array<Object>> {
+    search(params: Object, options?): Promise<Array<Object>> {
         return super.search(`
 
-        `, data, options);
+        `, params, options);
     }
 
     update(id: number, data: Object, options?: Object): Promise<Response> {
