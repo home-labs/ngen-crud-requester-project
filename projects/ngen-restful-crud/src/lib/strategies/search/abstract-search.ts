@@ -8,10 +8,10 @@ export abstract class AbstractSearch {
         private http: HttpClient
     ) { }
 
-    search(url: string, options?: {}, method?: 'get' | 'delete'): Promise<Object> {
+    search(url: string, options?: {}, method?: 'get' | 'delete'): Promise<Object | null> {
         return new Promise((accomplish, reject) => {
             this.http[method](url, options).subscribe(
-                (r: Object) => {
+                (r: Object | null) => {
                     accomplish(r);
                 },
                 e => {

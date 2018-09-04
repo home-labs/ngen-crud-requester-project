@@ -1,8 +1,5 @@
-import * as Contexts from './contexts';
-export { Contexts };
+export { Contexts } from './contexts/namespace';
 
-import * as Search from './search';
-export { Search };
+export { Search } from './search/namespace';
 
-import * as Send from './send';
-export { Send };
+export { Send } from './send/namespace';

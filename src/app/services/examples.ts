@@ -38,7 +38,7 @@ export class Examples extends NGenRESTfulCRUD.AbstractService {
         `, data, options);
     }
 
-    delete(id: number, options?: Object): Promise<Object> {
+    delete(id: number, options?: Object): Promise<Response | Object> {
         return super.destroy(`
 
         `, options);

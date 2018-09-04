@@ -12,7 +12,7 @@ export abstract class AbstractService {
     private deleteStrategyContext: Strategies.Contexts.Search;
 
     constructor(
-        private http: HttpClient
+        http: HttpClient
     ) {
 
         this.getStrategyContext = new Strategies.Contexts.Search(new Strategies.Search.Get(http));
@@ -51,17 +51,17 @@ export abstract class AbstractService {
         return this.postStrategyContext.send(this.resolveURL(url), data, options);
     }
 
-    protected get(url: string, options?): Promise<Object> {
+    protected get(url: string, options?): Promise<Object | null> {
         return this.getStrategyContext.search(this.resolveURL(url), options);
     }
 
-    protected search(url: string, params: Object, options?): Promise<Array<Object>> {
+    protected search(url: string, params: Object, options?): Promise<Array<Object> | null> {
         return new Promise((accomplish, reject) => {
             this.getStrategyContext
                 .search(this.composeURLQuery(this.resolveURL(url), params), options)
                 .then(
-                    (r: Object) => {
-                        if (r instanceof Array) {
+                    (r: Array<Object> | null) => {
+                        if (!r || (typeof r == "object" && r instanceof Array)) {
                             accomplish(r);
                         } else {
                             accomplish([r]);
@@ -83,7 +83,7 @@ export abstract class AbstractService {
         return this.putStrategyContext.send(this.resolveURL(url), data, options);
     }
 
-    protected destroy(url: string, options?): Promise<Object> {
+    protected destroy(url: string, options?): Promise<Response | Object | null> {
         return this.deleteStrategyContext.search(this.resolveURL(url), options);
     }
 
