@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { NGenRESTfulCRUD } from 'ngen-restful-crud';
+import { NGenRESTfulCRUD } from '../../../projects/ngen-restful-crud/src/public_api';
 
 
 @Injectable()
@@ -25,20 +25,27 @@ export class Examples extends NGenRESTfulCRUD.AbstractService {
         `, options);
     }
 
+    readCollection(id: number, options?): Promise<Object> {
+        // just changes the URL
+        return super.get(`
+
+        `, options);
+    }
+
     search(params: Object, options?): Promise<Array<Object>> {
         return super.search(`
 
         `, params, options);
     }
 
-    update(id: number, data: Object, options?: Object): Promise<Response> {
+    update(id: number, params: Object, options?: Object): Promise<Response> {
         // return super.put(`
         return super.patch(`
 
-        `, data, options);
+        `, params, options);
     }
 
-    delete(id: number, options?: Object): Promise<Response | Object> {
+    delete(id: number, options?: Object): Promise<Response> {
         return super.destroy(`
 
         `, options);

@@ -26,7 +26,7 @@ export abstract class AbstractService {
         return url.trim().replace(/[\n]+/, '');
     }
 
-    private composeURLQuery(url: string, params: Object): string {
+    private composeQueryParams(url: string, params: Object): string {
         let
             composed = '';
 
@@ -51,20 +51,36 @@ export abstract class AbstractService {
         return this.postStrategyContext.send(this.resolveURL(url), data, options);
     }
 
-    protected get(url: string, options?): Promise<Object | null> {
-        return this.getStrategyContext.search(this.resolveURL(url), options);
+    // An Array is a Object, so it isn't necessary specify a Array<Object> as return
+    // more generic than parent (Response is an Object)
+    protected get(url: string, options?): Promise<Object> {
+        return new Promise((accomplish, reject) => {
+            this.getStrategyContext.search(url, options)
+                .then(
+                    (r: Response) => {
+                        accomplish(r);
+                    }
+                ).catch(
+                    (e) => {
+                        reject(e);
+                    }
+                );
+        });
     }
 
-    protected search(url: string, params: Object, options?): Promise<Array<Object> | null> {
+    protected search(url: string, params: Object, options?): Promise<Array<Object>> {
         return new Promise((accomplish, reject) => {
-            this.getStrategyContext
-                .search(this.composeURLQuery(this.resolveURL(url), params), options)
+            this.get(this.composeQueryParams(this.resolveURL(url), params), options)
                 .then(
                     (r: Array<Object> | null) => {
-                        if (!r || (typeof r == "object" && r instanceof Array)) {
-                            accomplish(r);
+                        if (r && typeof r == 'object') {
+                            if (r instanceof Array) {
+                                accomplish(r);
+                            } else {
+                                accomplish([r]);
+                            }
                         } else {
-                            accomplish([r]);
+                            accomplish(r);
                         }
                     }
                 ).catch(
@@ -83,7 +99,7 @@ export abstract class AbstractService {
         return this.putStrategyContext.send(this.resolveURL(url), data, options);
     }
 
-    protected destroy(url: string, options?): Promise<Response | Object | null> {
+    protected destroy(url: string, options?): Promise<Response> {
         return this.deleteStrategyContext.search(this.resolveURL(url), options);
     }
 

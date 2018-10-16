@@ -21,12 +21,20 @@ export abstract class GenericAbstractService<T>
 
     abstract manufacture(object: Object): GenericAbstractProduct<T>;
 
-    protected readProduct(url: string, options?): Promise<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T>> {
+    protected readProduct(url: string, options?): Promise<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T> | Array<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T>>> {
 
         return new Promise((accomplish, reject) => {
             super.get(url, options).then(
-                (r: Object) => {
-                    accomplish(this.factoryClient.manufacture(r));
+                (r: any) => {
+                    if (r && typeof r == 'object') {
+                        if (r instanceof Array) {
+                            accomplish(this.factoryClient.manufactureCollection(r));
+                        } else {
+                            accomplish(this.factoryClient.manufacture(r));
+                        }
+                    } else {
+                        accomplish(r);
+                    }
                 }
             ).catch(
                 (e) => {
@@ -36,10 +44,10 @@ export abstract class GenericAbstractService<T>
         });
     }
 
-    protected searchProduct(url: string, data: Object, options?): Promise<Array<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T>>> {
+    protected searchProduct(url: string, params: Object, options?): Promise<Array<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T>>> {
         return new Promise(
             (accomplish, reject) => {
-                super.search(url, data, options).then(
+                super.search(url, params, options).then(
                     (r: Array<Object>) => {
                         accomplish(this.factoryClient.manufactureCollection(r));
                     }
