@@ -47,13 +47,13 @@ export abstract class AbstractService {
         return composed;
     }
 
-    protected create(url: string, data: Object, options?): Promise<Response> {
+    protected create(url: string, data: Object, options?: Object): Promise<Response> {
         return this.postStrategyContext.send(this.resolveURL(url), data, options);
     }
 
     // An Array is a Object, so it isn't necessary specify a Array<Object> as return
     // more generic than parent (Response is an Object)
-    protected get(url: string, options?): Promise<Object> {
+    protected get(url: string, options?: Object): Promise<Object> {
         return new Promise((accomplish, reject) => {
             this.getStrategyContext.search(url, options)
                 .then(
@@ -68,7 +68,7 @@ export abstract class AbstractService {
         });
     }
 
-    protected search(url: string, params: Object, options?): Promise<Array<Object>> {
+    protected search(url: string, params: Object, options?: Object): Promise<Array<Object>> {
         return new Promise((accomplish, reject) => {
             this.get(this.composeQueryParams(this.resolveURL(url), params), options)
                 .then(
@@ -91,15 +91,15 @@ export abstract class AbstractService {
         });
     }
 
-    protected patch(url: string, data: Object, options?): Promise<Response> {
+    protected patch(url: string, data: Object, options?: Object): Promise<Response> {
         return this.patchStrategyContext.send(this.resolveURL(url), data, options);
     }
 
-    protected put(url: string, data: Object, options?): Promise<Response> {
+    protected put(url: string, data: Object, options?: Object): Promise<Response> {
         return this.putStrategyContext.send(this.resolveURL(url), data, options);
     }
 
-    protected destroy(url: string, options?): Promise<Response> {
+    protected destroy(url: string, options?: Object): Promise<Response> {
         return this.deleteStrategyContext.search(this.resolveURL(url), options);
     }
 

@@ -21,7 +21,7 @@ export abstract class GenericAbstractService<T>
 
     abstract manufacture(object: Object): GenericAbstractProduct<T>;
 
-    protected readProduct(url: string, options?): Promise<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T> | Array<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T>>> {
+    protected readProduct(url: string, options?: Object): Promise<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T> | Array<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T>>> {
 
         return new Promise((accomplish, reject) => {
             super.get(url, options).then(
@@ -44,7 +44,7 @@ export abstract class GenericAbstractService<T>
         });
     }
 
-    protected searchProduct(url: string, params: Object, options?): Promise<Array<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T>>> {
+    protected searchProduct(url: string, params: Object, options?: Object): Promise<Array<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T>>> {
         return new Promise(
             (accomplish, reject) => {
                 super.search(url, params, options).then(
