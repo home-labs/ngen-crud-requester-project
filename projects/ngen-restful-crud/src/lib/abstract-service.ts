@@ -47,59 +47,61 @@ export abstract class AbstractService {
         return composed;
     }
 
-    protected create(url: string, data: Object, options?): Promise<Response> {
+    protected create(url: string, data: Object, options?: Object): Promise<Response> {
         return this.postStrategyContext.send(this.resolveURL(url), data, options);
     }
 
     // An Array is a Object, so it isn't necessary specify a Array<Object> as return
     // more generic than parent (Response is an Object)
-    protected get(url: string, options?): Promise<Object> {
-        return new Promise((accomplish, reject) => {
-            this.getStrategyContext.search(url, options)
-                .then(
+    protected get(url: string, options?: Object): Promise<Object> {
+        return new Promise(
+            (accomplish: Function, reject: Function) => {
+                this.getStrategyContext.search(url, options).then(
                     (r: Response) => {
                         accomplish(r);
                     }
                 ).catch(
-                    (e) => {
+                    e => {
                         reject(e);
                     }
                 );
-        });
+            }
+        );
     }
 
-    protected search(url: string, params: Object, options?): Promise<Array<Object>> {
-        return new Promise((accomplish, reject) => {
-            this.get(this.composeQueryParams(this.resolveURL(url), params), options)
-                .then(
-                    (r: Array<Object> | null) => {
-                        if (r && typeof r == 'object') {
-                            if (r instanceof Array) {
-                                accomplish(r);
+    protected search(url: string, params: Object, options?: Object): Promise<Array<Object>> {
+        return new Promise(
+            (accomplish: Function, reject: Function) => {
+                this.get(this.composeQueryParams(this.resolveURL(url), params), options).then(
+                        (r: Array<Object> | null) => {
+                            if (r && typeof r == 'object') {
+                                if (r instanceof Array) {
+                                    accomplish(r);
+                                } else {
+                                    accomplish([r]);
+                                }
                             } else {
-                                accomplish([r]);
+                                accomplish(r);
                             }
-                        } else {
-                            accomplish(r);
                         }
-                    }
-                ).catch(
-                    (e) => {
-                        reject(e);
-                    }
-                );
-        });
+                    ).catch(
+                        e => {
+                            reject(e);
+                        }
+                    );
+            }
+        );
     }
 
-    protected patch(url: string, data: Object, options?): Promise<Response> {
+    protected patch(url: string, data: Object, options?: Object): Promise<Response> {
         return this.patchStrategyContext.send(this.resolveURL(url), data, options);
     }
 
-    protected put(url: string, data: Object, options?): Promise<Response> {
+    protected put(url: string, data: Object, options?: Object): Promise<Response> {
         return this.putStrategyContext.send(this.resolveURL(url), data, options);
     }
 
-    protected destroy(url: string, options?): Promise<Response> {
+    protected destroy(url: string, options?: Object): Promise<Response> {
         return this.deleteStrategyContext.search(this.resolveURL(url), options);
     }
 

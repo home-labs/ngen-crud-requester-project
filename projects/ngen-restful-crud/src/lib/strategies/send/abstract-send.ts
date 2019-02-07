@@ -5,17 +5,19 @@ export abstract class AbstractSend {
 
     constructor(private http: HttpClient) { }
 
-    send(url: string, data: Object, options?: {}, method?: 'post' | 'put' | 'patch'): Promise<Response> {
-        return new Promise((accomplish, reject) => {
-            this.http[method](url, data, options).subscribe(
-                (r: Response) => {
-                    accomplish(r);
-                },
-                e => {
-                    reject(e);
-                }
-            );
-        });
+    send(url: string, data: Object, options?: Object, method?: 'post' | 'put' | 'patch'): Promise<Response> {
+        return new Promise(
+            (accomplish: Function, reject: Function) => {
+                this.http[method](url, data, options).subscribe(
+                    (r: Response) => {
+                        accomplish(r);
+                    },
+                    e => {
+                        reject(e);
+                    }
+                );
+            }
+        );
     }
 
 }

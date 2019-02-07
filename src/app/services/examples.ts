@@ -32,9 +32,9 @@ export class Examples extends NGenRESTfulCRUD.AbstractService {
         `, options);
     }
 
-    search(params: Object, options?): Promise<Array<Object>> {
+    search(params: Object, options?: Object): Promise<Array<Object>> {
         return super.search(`
-
+            https://servicodados.ibge.gov.br/api/v1/localidades/estados
         `, params, options);
     }
 
