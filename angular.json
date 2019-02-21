@@ -43,7 +43,14 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
             }
           }
         },
@@ -98,6 +105,7 @@
     "ngen-restful-crud-project-e2e": {
       "root": "e2e/",
       "projectType": "application",
+      "prefix": "",
       "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
@@ -133,11 +141,6 @@
           "options": {
             "tsConfig": "projects/ngen-restful-crud/tsconfig.lib.json",
             "project": "projects/ngen-restful-crud/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "project": "projects/ngen-restful-crud/ng-package.prod.json"
-            }
           }
         },
         "test": {

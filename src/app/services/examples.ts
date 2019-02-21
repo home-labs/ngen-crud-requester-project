@@ -1,17 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
-import { NGenRESTfulCRUD } from '../../../projects/ngen-restful-crud/src/public_api';
+import { NGenRESTfulCRUD } from 'ngen-restful-crud';
 
 
 @Injectable()
 export class Examples extends NGenRESTfulCRUD.AbstractService {
-
-    constructor(
-        http: HttpClient
-    ) {
-        super(http);
-    }
 
     create(data: Object, options?): Promise<Response> {
         return super.create(`

@@ -12,9 +12,8 @@ export abstract class AbstractService {
     private deleteStrategyContext: Strategies.Contexts.Search;
 
     constructor(
-        http: HttpClient
+        http?: HttpClient
     ) {
-
         this.getStrategyContext = new Strategies.Contexts.Search(new Strategies.Search.Get(http));
         this.postStrategyContext = new Strategies.Contexts.Send(new Strategies.Send.Post(http));
         this.patchStrategyContext = new Strategies.Contexts.Send(new Strategies.Send.Patch(http));

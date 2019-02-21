@@ -13,10 +13,8 @@ export abstract class GenericAbstractService<T>
     private factoryClient: NGenPattern.Creational.AbstractFactory
         .GenericFactoryClient<T>;
 
-    constructor(
-        http: HttpClient
-    ) {
-        super(http);
+    constructor() {
+        super();
         this.factoryClient = new NGenPattern.Creational.AbstractFactory
             .GenericFactoryClient(this);
     }
