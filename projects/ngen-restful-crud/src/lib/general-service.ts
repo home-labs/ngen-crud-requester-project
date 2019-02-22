@@ -62,7 +62,7 @@ export class GeneralService {
 
     // An Array is a Object, so it isn't necessary specify a Array<Object> as return
     // more generic than parent (Response is an Object)
-    get(url: string, options?: Object): Promise<Object> {
+    read(url: string, options?: Object): Promise<Object> {
         return new Promise(
             (accomplish: Function, reject: Function) => {
                 this.getStrategyContext.search(url, options).then(
@@ -81,7 +81,7 @@ export class GeneralService {
     search(url: string, params: Object, options?: Object): Promise<Array<Object>> {
         return new Promise(
             (accomplish: Function, reject: Function) => {
-                this.get(this.composeQueryParams(this.resolveURL(url), params), options).then(
+                this.read(this.composeQueryParams(this.resolveURL(url), params), options).then(
                         (r: Array<Object> | null) => {
                             if (r && typeof r == 'object') {
                                 if (r instanceof Array) {
@@ -102,7 +102,7 @@ export class GeneralService {
         );
     }
 
-    patch(url: string, data: Object, options?: Object): Promise<Response> {
+    update(url: string, data: Object, options?: Object): Promise<Response> {
         return this.patchStrategyContext.send(this.resolveURL(url), data, options);
     }
 

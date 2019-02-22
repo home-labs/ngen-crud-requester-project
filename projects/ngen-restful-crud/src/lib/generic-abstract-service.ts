@@ -26,7 +26,7 @@ export abstract class GenericAbstractService<T>
 
         return new Promise(
             (accomplish: Function, reject: Function) => {
-                this.service.get(url, options).then(
+                this.service.read(url, options).then(
                     (r: any) => {
                         if (r && typeof r == 'object') {
                             if (r instanceof Array) {
