@@ -1,24 +1,34 @@
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 import { Strategies } from './strategies/namespace';
+import { Search } from './strategies/search/namespace';
+import { Send } from './strategies/send/namespace';
 
 
-export abstract class AbstractService {
+@Injectable()
+export class GeneralService {
 
-    private getStrategyContext: Strategies.Contexts.Search;
-    private postStrategyContext: Strategies.Contexts.Send;
-    private patchStrategyContext: Strategies.Contexts.Send;
-    private putStrategyContext: Strategies.Contexts.Send;
     private deleteStrategyContext: Strategies.Contexts.Search;
+    private getStrategyContext: Strategies.Contexts.Search;
+
+    private patchStrategyContext: Strategies.Contexts.Send;
+    private postStrategyContext: Strategies.Contexts.Send;
+    private putStrategyContext: Strategies.Contexts.Send;
 
     constructor(
-        http?: HttpClient
+        deleteStrategy: Search.Delete,
+        getStrategy: Search.Get,
+
+        patchStrategy: Send.Patch,
+        postStrategy: Send.Post,
+        putStrategy: Send.Put
     ) {
-        this.getStrategyContext = new Strategies.Contexts.Search(new Strategies.Search.Get(http));
-        this.postStrategyContext = new Strategies.Contexts.Send(new Strategies.Send.Post(http));
-        this.patchStrategyContext = new Strategies.Contexts.Send(new Strategies.Send.Patch(http));
-        this.putStrategyContext = new Strategies.Contexts.Send(new Strategies.Send.Put(http));
-        this.deleteStrategyContext = new Strategies.Contexts.Search(new Strategies.Search.Delete(http));
+        this.deleteStrategyContext = new Strategies.Contexts.Search(deleteStrategy);
+        this.getStrategyContext = new Strategies.Contexts.Search(getStrategy);
+
+        this.patchStrategyContext = new Strategies.Contexts.Send(patchStrategy);
+        this.postStrategyContext = new Strategies.Contexts.Send(postStrategy);
+        this.putStrategyContext = new Strategies.Contexts.Send(putStrategy);
     }
 
     private resolveURL(url: string) {
@@ -46,13 +56,13 @@ export abstract class AbstractService {
         return composed;
     }
 
-    protected create(url: string, data: Object, options?: Object): Promise<Response> {
+    create(url: string, data: Object, options?: Object): Promise<Response> {
         return this.postStrategyContext.send(this.resolveURL(url), data, options);
     }
 
     // An Array is a Object, so it isn't necessary specify a Array<Object> as return
     // more generic than parent (Response is an Object)
-    protected get(url: string, options?: Object): Promise<Object> {
+    get(url: string, options?: Object): Promise<Object> {
         return new Promise(
             (accomplish: Function, reject: Function) => {
                 this.getStrategyContext.search(url, options).then(
@@ -68,7 +78,7 @@ export abstract class AbstractService {
         );
     }
 
-    protected search(url: string, params: Object, options?: Object): Promise<Array<Object>> {
+    search(url: string, params: Object, options?: Object): Promise<Array<Object>> {
         return new Promise(
             (accomplish: Function, reject: Function) => {
                 this.get(this.composeQueryParams(this.resolveURL(url), params), options).then(
@@ -92,15 +102,15 @@ export abstract class AbstractService {
         );
     }
 
-    protected patch(url: string, data: Object, options?: Object): Promise<Response> {
+    patch(url: string, data: Object, options?: Object): Promise<Response> {
         return this.patchStrategyContext.send(this.resolveURL(url), data, options);
     }
 
-    protected put(url: string, data: Object, options?: Object): Promise<Response> {
+    put(url: string, data: Object, options?: Object): Promise<Response> {
         return this.putStrategyContext.send(this.resolveURL(url), data, options);
     }
 
-    protected destroy(url: string, options?: Object): Promise<Response> {
+    destroy(url: string, options?: Object): Promise<Response> {
         return this.deleteStrategyContext.search(this.resolveURL(url), options);
     }
 

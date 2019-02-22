@@ -4,44 +4,48 @@ import { NGenRESTfulCRUD } from 'ngen-restful-crud';
 
 
 @Injectable()
-export class Examples extends NGenRESTfulCRUD.AbstractService {
+export class Examples {
 
-    create(data: Object, options?): Promise<Response> {
-        return super.create(`
+    constructor(
+        private service: NGenRESTfulCRUD.GeneralService
+    ) { }
 
-        `, data, options);
-    }
+    // create(data: Object, options?): Promise<Response> {
+    //     return super.create(`
 
-    read(id: number, options?): Promise<Object> {
-        return super.get(`
+    //     `, data, options);
+    // }
 
-        `, options);
-    }
+    // read(id: number, options?): Promise<Object> {
+    //     return super.get(`
 
-    readCollection(id: number, options?): Promise<Object> {
-        // just changes the URL
-        return super.get(`
+    //     `, options);
+    // }
 
-        `, options);
-    }
+    // readCollection(id: number, options?): Promise<Object> {
+    //     // just changes the URL
+    //     return super.get(`
+
+    //     `, options);
+    // }
 
     search(params: Object, options?: Object): Promise<Array<Object>> {
-        return super.search(`
+        return this.service.search(`
             https://servicodados.ibge.gov.br/api/v1/localidades/estados
         `, params, options);
     }
 
-    update(id: number, params: Object, options?: Object): Promise<Response> {
-        // return super.put(`
-        return super.patch(`
+    // update(id: number, params: Object, options?: Object): Promise<Response> {
+    //     // return super.put(`
+    //     return super.patch(`
 
-        `, params, options);
-    }
+    //     `, params, options);
+    // }
 
-    delete(id: number, options?: Object): Promise<Response> {
-        return super.destroy(`
+    // delete(id: number, options?: Object): Promise<Response> {
+    //     return super.destroy(`
 
-        `, options);
-    }
+    //     `, options);
+    // }
 
 }

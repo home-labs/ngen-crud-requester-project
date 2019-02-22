@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import { NGenRESTfulCRUDModule } from '../../projects/ngen-restful-crud/src/public_api';
+import { NGenRESTfulCRUDModule } from 'ngen-restful-crud';
 
 @NgModule({
     imports: [

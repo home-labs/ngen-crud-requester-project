@@ -1,20 +1,19 @@
-import { HttpClient } from '@angular/common/http';
-
-import { AbstractService } from './abstract-service';
-
 import { NGenPattern } from 'ngen-pattern';
+
+import { GeneralService } from './general-service';
+
 import { GenericAbstractProduct } from './generic-abstract-product';
 
 
 export abstract class GenericAbstractService<T>
-    extends AbstractService
     implements NGenPattern.Creational.AbstractFactory.GenericAbstractFactory<T> {
 
     private factoryClient: NGenPattern.Creational.AbstractFactory
         .GenericFactoryClient<T>;
 
-    constructor() {
-        super();
+    constructor(
+        private service: GeneralService,
+    ) {
         this.factoryClient = new NGenPattern.Creational.AbstractFactory
             .GenericFactoryClient(this);
     }
@@ -27,7 +26,7 @@ export abstract class GenericAbstractService<T>
 
         return new Promise(
             (accomplish: Function, reject: Function) => {
-                super.get(url, options).then(
+                this.service.get(url, options).then(
                     (r: any) => {
                         if (r && typeof r == 'object') {
                             if (r instanceof Array) {
@@ -53,7 +52,7 @@ export abstract class GenericAbstractService<T>
         Promise<Array<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T>>> {
         return new Promise(
             (accomplish: Function, reject: Function) => {
-                super.search(url, params, options).then(
+                this.service.search(url, params, options).then(
                     (r: Array<Object>) => {
                         accomplish(this.factoryClient
                             .manufactureCollection(r));
