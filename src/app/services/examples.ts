@@ -2,13 +2,25 @@ import { Injectable } from '@angular/core';
 
 import { NGenRESTfulCRUD } from 'ngen-restful-crud';
 
+import { Example } from '../models/example';
+
 
 @Injectable()
-export class Examples {
+export class Examples
+                        // extends NGenRESTfulCRUD.GenericAbstractService<Example>
+{
+    private _service: NGenRESTfulCRUD.GeneralService
 
     constructor(
-        private service: NGenRESTfulCRUD.GeneralService
-    ) { }
+        service: NGenRESTfulCRUD.GeneralService
+    ) {
+        // super(service);
+        this._service = service;
+    }
+
+    // manufacture(response: Response): NGenRESTfulCRUD.GenericAbstractProduct<Example> {
+    //     return new Example(response);
+    // }
 
     // create(data: Object, options?): Promise<Response> {
     //     return super.create(`
@@ -30,7 +42,7 @@ export class Examples {
     // }
 
     search(params: Object, options?: Object): Promise<Array<Object>> {
-        return this.service.search(`
+        return this._service.search(`
             https://servicodados.ibge.gov.br/api/v1/localidades/estados
         `, params, options);
     }

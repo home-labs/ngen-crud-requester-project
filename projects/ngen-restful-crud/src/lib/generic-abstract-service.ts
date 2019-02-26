@@ -18,7 +18,7 @@ export abstract class GenericAbstractService<T>
             .GenericFactoryClient(this);
     }
 
-    abstract manufacture(object: Object): GenericAbstractProduct<T>;
+    abstract manufacture(response: Response): GenericAbstractProduct<T>;
 
     protected readProduct(url: string, options?: Object):
         Promise<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T> |
