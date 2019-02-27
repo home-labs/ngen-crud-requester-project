@@ -3,12 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import { NGenRESTfulCRUDModule } from 'ngen-crud-request';
+import { NGenCRUDRequestModule } from 'ngen-crud-request';
+
 
 @NgModule({
     imports: [
         BrowserModule,
-        NGenRESTfulCRUDModule
+        NGenCRUDRequestModule
     ],
     declarations: [
         AppComponent

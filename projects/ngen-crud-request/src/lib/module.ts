@@ -27,4 +27,4 @@ import { GeneralService } from './general-service';
         GeneralService
     ]
 })
-export class NGenRESTfulCRUDModule { }
+export class NGenCRUDRequestModule { }

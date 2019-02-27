@@ -1,7 +1,7 @@
-import { NGenRESTfulCRUD } from 'ngen-crud-request';
+import { NGenCRUDRequest } from 'ngen-crud-request';
 
 
-export class Example implements NGenRESTfulCRUD.GenericAbstractProduct<Example>  {
+export class Example implements NGenCRUDRequest.GenericAbstractProduct<Example>  {
 
     constructor(object: Object = {}) { }
 

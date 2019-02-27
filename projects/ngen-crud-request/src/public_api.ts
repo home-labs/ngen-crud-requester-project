@@ -1,4 +1,4 @@
-import * as NGenRESTfulCRUD from './lib';
-export { NGenRESTfulCRUD };
+import * as NGenCRUDResquest from './lib';
+export { NGenCRUDResquest };
 
-export {NGenRESTfulCRUDModule} from './lib';
+export { NGenCRUDRequestModule } from './lib';

@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
 
-import { NGenRESTfulCRUD } from 'ngen-crud-request';
+import { NGenCRUDResquest } from 'ngen-crud-request';
 
 import { Example } from '../models/example';
 
 
 @Injectable()
 export class Examples
-                        // extends NGenRESTfulCRUD.GenericAbstractService<Example>
+                        // extends NGenCRUDResquest.GenericAbstractService<Example>
 {
-    private _service: NGenRESTfulCRUD.GeneralService
+    private _service: NGenCRUDResquest.GeneralService
 
     constructor(
-        service: NGenRESTfulCRUD.GeneralService
+        service: NGenCRUDResquest.GeneralService
     ) {
         // super(service);
         this._service = service;
     }
 
-    // manufacture(response: Response): NGenRESTfulCRUD.GenericAbstractProduct<Example> {
+    // manufacture(response: Response): NGenCRUDResquest.GenericAbstractProduct<Example> {
     //     return new Example(response);
     // }
 
