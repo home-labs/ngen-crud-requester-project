@@ -10,47 +10,54 @@
 
 ## Usage
 
-Import ```NGenRESTfulCRUD``` from ```ngen-restful-crud``` in your service and extend the ```AbstractService``` and pass a ```HttpClient``` from ```Angular``` (adrress: ```@angular/common/http```) reference to super class, like that:
+Import ```NGenRESTfulCRUDModule``` from ```ngen-restful-crud``` in your module, and put in the key ```imports``` of metadata from```NgModule```, so import ```NGenRESTfulCRUD``` in your service and inject the ```GeneralService```, like that:
+
+```typescript
+@NgModule({
+    imports: [
+        NGenRESTfulCRUDModule
+    ]
+})
+export class YourModule { }
+```
 
 ```typescript
 import { NGenRESTfulCRUD } from 'ngen-restful-crud';
 
 @Injectable()
-class MyService extends NGenRESTfulCRUD.AbstractService {
+class YourService {
 
-	constructor(http: HttpClient) {
-		super(http);
-	}
+	constructor(private serviceHelp: NGenRESTfulCRUD.GeneralService) { }
 
 }
 ```
 
 ### To use with a Model and the Abstract Factory Design Pattern
 
-Import ```NGenRESTfulCRUD``` from ```ngen-restful-crud``` in your model and implement the ```getConcrete``` method implementing the ```NGenRESTfulCRUD.GenericAbstractProduct<T>``` interface, like that:
+Import ```NGenRESTfulCRUD``` from ```ngen-restful-crud``` in your model and implement the method ```getConcrete``` implementing the interface ```NGenRESTfulCRUD.GenericAbstractProduct<T>```, like that:
 
 ```typescript
 import { NGenRESTfulCRUD } from 'ngen-restful-crud';
 
-class MyModel implements NGenRESTfulCRUD.GenericAbstractProduct<MyModel> {
+class YourModel implements NGenRESTfulCRUD.GenericAbstractProduct<YourModel> {
 
-    getConcrete(): MyModel {
+    getConcrete(): YourModel {
         return this;
     }
 
 }
 ```
 
-So implements the ```manufacture``` method extending the ```NGenRESTfulCRUD.GenericAbstractService<MyModel>``` abstract class, like that:
+So implements the method ```manufacture``` extending the abstract class ```NGenRESTfulCRUD.GenericAbstractService<YourModel>```, like that:
 
 ```typescript
 import { NGenRESTfulCRUD } from 'ngen-restful-crud';
 
 @Injectable()
-class MyService extends NGenRESTfulCRUD.GenericAbstractService<MyModel> {
+class YourService extends NGenRESTfulCRUD.GenericAbstractService<YourModel> {
 
-    manufacture(response: Response): NGenRESTfulCRUD.GenericAbstractProduct<MyModel> {
-        return new MyModel();
+    manufacture(response: Response): NGenRESTfulCRUD.GenericAbstractProduct<YourModel> {
+        return new YourModel();
     }
 
 }
