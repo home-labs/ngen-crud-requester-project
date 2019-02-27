@@ -1,29 +1,129 @@
 
-# NGenCRUDRequestProject
+# NGenCRUDRequest - Angular Generic RESTful to do CRUD
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+  
 
-## Development server
+## Requirements
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+  
 
-## Code scaffolding
+>- Angular 2 or higher.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+  
 
-## Build
+## Installing
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+  
 
-## Running unit tests
+$ npm i ngen-crud-request --save
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+  
 
-## Running end-to-end tests
+## Usage
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+  
 
-## Further help
+Import ```NGenCRUDRequestModule``` from ```ngen-crud-request``` in your module, and put in the key ```imports``` of metadata from```NgModule```, so import ```NGenCRUDRequest``` in your service and inject the ```GeneralService```, like that:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+  
+
+```typescript
+
+@NgModule({
+
+imports: [
+
+NGenCRUDRequestModule
+
+]
+
+})
+
+export  class  YourModule { }
+
+```
+
+  
+
+```typescript
+
+import { NGenCRUDRequest } from  'ngen-crud-request';
+
+  
+
+@Injectable()
+
+class  YourService {
+
+  
+
+constructor(private  serviceHelp: NGenCRUDRequest.GeneralService) { }
+
+  
+
+}
+
+```
+
+  
+
+### To use with a Model and the Abstract Factory Design Pattern
+
+  
+
+Import ```NGenCRUDRequest``` from ```ngen-crud-request``` in your model and implement the method ```getConcrete``` implementing the interface ```NGenCRUDRequest.GenericAbstractProduct<T>```, like that:
+
+  
+
+```typescript
+
+import { NGenCRUDRequest } from  'ngen-crud-request';
+
+  
+
+class  YourModel  implements  NGenCRUDRequest.GenericAbstractProduct<YourModel> {
+
+  
+
+getConcrete(): YourModel {
+
+return  this;
+
+}
+
+  
+
+}
+
+```
+
+  
+
+So implements the method ```manufacture``` extending the abstract class ```NGenCRUDRequest.GenericAbstractService<YourModel>```, like that:
+
+  
+
+```typescript
+
+import { NGenCRUDRequest } from  'ngen-crud-request';
+
+  
+
+@Injectable()
+
+class  YourService  extends  NGenCRUDRequest.GenericAbstractService<YourModel> {
+
+  
+
+manufacture(response: Response): NGenCRUDRequest.GenericAbstractProduct<YourModel> {
+
+return  new  YourModel();
+
+}
+
+  
+
+}
+
+```
 
