@@ -1,5 +1,5 @@
 {
-  "name": "ngen-restful-crud",
+  "name": "ngen-crud-request",
   "version": "3.0.0-rc.2",
   "peerDependencies": {
     "@angular/common": ">=4.0.0",

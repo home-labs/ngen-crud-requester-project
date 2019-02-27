@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/ngen-restful-crud",
+  "dest": "../../dist/ngen-crud-request",
   "deleteDestPath": false,
   "lib": {
     "entryFile": "src/public_api.ts"

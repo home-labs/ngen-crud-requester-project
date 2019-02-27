@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { NGenRESTfulCRUD } from 'ngen-restful-crud';
+import { NGenRESTfulCRUD } from 'ngen-crud-request';
 
 import { Example } from '../models/example';
 

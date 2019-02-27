@@ -9,6 +9,6 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to ngen-restful-crud-project!');
+    expect(page.getParagraphText()).toEqual('Welcome to ngen-crud-request-project!');
   });
 });

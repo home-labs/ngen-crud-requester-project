@@ -6,11 +6,11 @@
 
 ## Installing
 
-	$ npm i ngen-restful-crud --save
+	$ npm i ngen-crud-request --save
 
 ## Usage
 
-Import ```NGenRESTfulCRUDModule``` from ```ngen-restful-crud``` in your module, and put in the key ```imports``` of metadata from```NgModule```, so import ```NGenRESTfulCRUD``` in your service and inject the ```GeneralService```, like that:
+Import ```NGenRESTfulCRUDModule``` from ```ngen-crud-request``` in your module, and put in the key ```imports``` of metadata from```NgModule```, so import ```NGenRESTfulCRUD``` in your service and inject the ```GeneralService```, like that:
 
 ```typescript
 @NgModule({
@@ -22,7 +22,7 @@ export class YourModule { }
 ```
 
 ```typescript
-import { NGenRESTfulCRUD } from 'ngen-restful-crud';
+import { NGenRESTfulCRUD } from 'ngen-crud-request';
 
 @Injectable()
 class YourService {
@@ -34,10 +34,10 @@ class YourService {
 
 ### To use with a Model and the Abstract Factory Design Pattern
 
-Import ```NGenRESTfulCRUD``` from ```ngen-restful-crud``` in your model and implement the method ```getConcrete``` implementing the interface ```NGenRESTfulCRUD.GenericAbstractProduct<T>```, like that:
+Import ```NGenRESTfulCRUD``` from ```ngen-crud-request``` in your model and implement the method ```getConcrete``` implementing the interface ```NGenRESTfulCRUD.GenericAbstractProduct<T>```, like that:
 
 ```typescript
-import { NGenRESTfulCRUD } from 'ngen-restful-crud';
+import { NGenRESTfulCRUD } from 'ngen-crud-request';
 
 class YourModel implements NGenRESTfulCRUD.GenericAbstractProduct<YourModel> {
 
@@ -51,7 +51,7 @@ class YourModel implements NGenRESTfulCRUD.GenericAbstractProduct<YourModel> {
 So implements the method ```manufacture``` extending the abstract class ```NGenRESTfulCRUD.GenericAbstractService<YourModel>```, like that:
 
 ```typescript
-import { NGenRESTfulCRUD } from 'ngen-restful-crud';
+import { NGenRESTfulCRUD } from 'ngen-crud-request';
 
 @Injectable()
 class YourService extends NGenRESTfulCRUD.GenericAbstractService<YourModel> {

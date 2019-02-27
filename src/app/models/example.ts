@@ -1,4 +1,4 @@
-import { NGenRESTfulCRUD } from 'ngen-restful-crud';
+import { NGenRESTfulCRUD } from 'ngen-crud-request';
 
 
 export class Example implements NGenRESTfulCRUD.GenericAbstractProduct<Example>  {
