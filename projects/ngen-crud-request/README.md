@@ -1,4 +1,3 @@
-
 # NGenCRUDRequest - Angular Generic RESTful to do CRUD
 
 ## Requirements
@@ -38,7 +37,7 @@ class  YourService {
 }
 ```
 
-  
+
 
 ### To use with a Model and the Abstract Factory Design Pattern
 
@@ -74,4 +73,3 @@ class  YourService  extends  NGenCRUDRequest.GenericAbstractService<YourModel> {
 
 }
 ```
-
