@@ -16,19 +16,19 @@ export class GeneralService {
     private putStrategyContext: Strategies.Contexts.Send;
 
     constructor(
-        deleteStrategy: Search.Delete,
-        getStrategy: Search.Get,
+        private deleteStrategy: Search.Delete,
+        private getStrategy: Search.Get,
 
-        patchStrategy: Send.Patch,
-        postStrategy: Send.Post,
-        putStrategy: Send.Put
+        private patchStrategy: Send.Patch,
+        private postStrategy: Send.Post,
+        private putStrategy: Send.Put
     ) {
-        this.deleteStrategyContext = new Strategies.Contexts.Search(deleteStrategy);
-        this.getStrategyContext = new Strategies.Contexts.Search(getStrategy);
+        this.deleteStrategyContext = new Strategies.Contexts.Search(this.deleteStrategy);
+        this.getStrategyContext = new Strategies.Contexts.Search(this.getStrategy);
 
-        this.patchStrategyContext = new Strategies.Contexts.Send(patchStrategy);
-        this.postStrategyContext = new Strategies.Contexts.Send(postStrategy);
-        this.putStrategyContext = new Strategies.Contexts.Send(putStrategy);
+        this.patchStrategyContext = new Strategies.Contexts.Send(this.patchStrategy);
+        this.postStrategyContext = new Strategies.Contexts.Send(this.postStrategy);
+        this.putStrategyContext = new Strategies.Contexts.Send(this.putStrategy);
     }
 
     private resolveURL(url: string) {
