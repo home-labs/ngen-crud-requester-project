@@ -17,11 +17,11 @@
       "dom"
     ],
     "paths": {
-      "ngen-crud-request": [
-        "dist/ngen-crud-request"
+      "ngen-crud-requester": [
+        "dist/ngen-crud-requester"
       ],
-      "ngen-crud-request/*": [
-        "dist/ngen-crud-request/*"
+      "ngen-crud-requester/*": [
+        "dist/ngen-crud-requester/*"
       ]
     }
   }
