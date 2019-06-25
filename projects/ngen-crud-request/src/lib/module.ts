@@ -9,6 +9,7 @@ import {
 } from './strategies/send/namespace';
 
 import { GeneralService } from './general-service';
+import { ModuleWithProviders } from '@angular/compiler/src/core';
 
 
 @NgModule({
@@ -17,14 +18,22 @@ import { GeneralService } from './general-service';
     ],
     exports: [
         HttpClientModule
-    ],
-    providers: [
-        Search.Delete,
-        Search.Get,
-        Send.Patch,
-        Send.Post,
-        Send.Put,
-        GeneralService
     ]
 })
-export class NGenCRUDRequestModule { }
+export class NGenCRUDRequestModule {
+
+    static forRoot(): ModuleWithProviders {
+        return {
+            ngModule: NGenCRUDRequestModule,
+            providers: [
+                Search.Delete,
+                Search.Get,
+                Send.Patch,
+                Send.Post,
+                Send.Put,
+                GeneralService
+            ]
+        };
+    }
+
+}

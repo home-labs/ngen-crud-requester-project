@@ -1,34 +1,36 @@
-import { Injectable } from '@angular/core';
+import {
+    Injectable,
+    Inject
+} from '@angular/core';
 
+import { Contexts } from './strategies/contexts/namespace';
 import { Strategies } from './strategies/namespace';
-import { Search } from './strategies/search/namespace';
-import { Send } from './strategies/send/namespace';
 
 
 @Injectable()
 export class GeneralService {
 
-    private deleteStrategyContext: Strategies.Contexts.Search;
-    private getStrategyContext: Strategies.Contexts.Search;
+    private deleteStrategyContext: Contexts.Search;
+    private getStrategyContext: Contexts.Search;
 
-    private patchStrategyContext: Strategies.Contexts.Send;
-    private postStrategyContext: Strategies.Contexts.Send;
-    private putStrategyContext: Strategies.Contexts.Send;
+    private patchStrategyContext: Contexts.Send;
+    private postStrategyContext: Contexts.Send;
+    private putStrategyContext: Contexts.Send;
 
     constructor(
-        private deleteStrategy: Search.Delete,
-        private getStrategy: Search.Get,
+        @Inject(Strategies.Search.Delete) private deleteStrategy?: Strategies.Search.Delete,
+        @Inject(Strategies.Search.Get) private getStrategy?: Strategies.Search.Get,
 
-        private patchStrategy: Send.Patch,
-        private postStrategy: Send.Post,
-        private putStrategy: Send.Put
+        @Inject(Strategies.Send.Patch) private patchStrategy?: Strategies.Send.Patch,
+        @Inject(Strategies.Send.Post) private postStrategy?: Strategies.Send.Post,
+        @Inject(Strategies.Send.Put) private putStrategy?: Strategies.Send.Put
     ) {
-        this.deleteStrategyContext = new Strategies.Contexts.Search(this.deleteStrategy);
-        this.getStrategyContext = new Strategies.Contexts.Search(this.getStrategy);
+        this.deleteStrategyContext = new Contexts.Search(this.deleteStrategy);
+        this.getStrategyContext = new Contexts.Search(this.getStrategy);
 
-        this.patchStrategyContext = new Strategies.Contexts.Send(this.patchStrategy);
-        this.postStrategyContext = new Strategies.Contexts.Send(this.postStrategy);
-        this.putStrategyContext = new Strategies.Contexts.Send(this.putStrategy);
+        this.patchStrategyContext = new Contexts.Send(this.patchStrategy);
+        this.postStrategyContext = new Contexts.Send(this.postStrategy);
+        this.putStrategyContext = new Contexts.Send(this.putStrategy);
     }
 
     private resolveURL(url: string) {
@@ -78,7 +80,7 @@ export class GeneralService {
         );
     }
 
-    search(url: string, params: Object, options?: Object): Promise<Array<Object>> {
+    protected search(url: string, params: Object, options?: Object): Promise<Array<Object>> {
         return new Promise(
             (accomplish: Function, reject: Function) => {
                 this.read(this.composeQueryParams(this.resolveURL(url), params), options).then(

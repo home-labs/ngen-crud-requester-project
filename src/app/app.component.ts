@@ -17,7 +17,7 @@ export class AppComponent {
     constructor(
         examplesService: Services.Examples
     ) {
-        examplesService.search({}).then(
+        examplesService.searchProxy({}).then(
             (r: Array<Object>) => {
                 this.collection = r;
             }

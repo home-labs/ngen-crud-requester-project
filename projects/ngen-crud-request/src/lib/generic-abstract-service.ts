@@ -28,7 +28,7 @@ export abstract class GenericAbstractService<T>
             (accomplish: Function, reject: Function) => {
                 this.service.read(url, options).then(
                     (r: any) => {
-                        if (r && typeof r == 'object') {
+                        if (r && typeof r === 'object') {
                             if (r instanceof Array) {
                                 accomplish(this.factoryClient
                                     .manufactureCollection(r));
@@ -52,16 +52,16 @@ export abstract class GenericAbstractService<T>
         Promise<Array<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T>>> {
         return new Promise(
             (accomplish: Function, reject: Function) => {
-                this.service.search(url, params, options).then(
-                    (r: Array<Object>) => {
-                        accomplish(this.factoryClient
-                            .manufactureCollection(r));
-                    }
-                ).catch(
-                    e => {
-                        reject(e);
-                    }
-                )
+                // this.service.search(url, params, options).then(
+                //     (r: Array<Object>) => {
+                //         accomplish(this.factoryClient
+                //             .manufactureCollection(r));
+                //     }
+                // ).catch(
+                //     e => {
+                //         reject(e);
+                //     }
+                // );
             }
         );
     }
