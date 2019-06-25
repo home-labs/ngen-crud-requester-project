@@ -5,6 +5,9 @@ import {
 
 import { Contexts } from './strategies/contexts/namespace';
 import { Strategies } from './strategies/namespace';
+// use a namespace with two or more nested names as a property kind generated a error when the compiler was doing "build"
+import { Search } from './strategies/search/namespace';
+import { Send } from './strategies/send/namespace';
 
 
 @Injectable()
@@ -18,12 +21,11 @@ export class GeneralService {
     private putStrategyContext: Contexts.Send;
 
     constructor(
-        @Inject(Strategies.Search.Delete) private deleteStrategy?: Strategies.Search.Delete,
-        @Inject(Strategies.Search.Get) private getStrategy?: Strategies.Search.Get,
-
-        @Inject(Strategies.Send.Patch) private patchStrategy?: Strategies.Send.Patch,
-        @Inject(Strategies.Send.Post) private postStrategy?: Strategies.Send.Post,
-        @Inject(Strategies.Send.Put) private putStrategy?: Strategies.Send.Put
+        @Inject(Strategies.Search.Delete) private deleteStrategy?: Search.Delete,
+        @Inject(Strategies.Search.Get) private getStrategy?: Search.Get,
+        @Inject(Strategies.Send.Patch) private patchStrategy?: Send.Patch,
+        @Inject(Strategies.Send.Post) private postStrategy?: Send.Post,
+        @Inject(Strategies.Send.Put) private putStrategy?: Send.Put
     ) {
         this.deleteStrategyContext = new Contexts.Search(this.deleteStrategy);
         this.getStrategyContext = new Contexts.Search(this.getStrategy);
