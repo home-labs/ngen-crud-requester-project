@@ -8,7 +8,6 @@ import {
     Send
 } from './strategies/send/namespace';
 
-import { GeneralService } from './general-service';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 
 
@@ -30,8 +29,7 @@ export class NGenCRUDRequestModule {
                 Search.Get,
                 Send.Patch,
                 Send.Post,
-                Send.Put,
-                GeneralService
+                Send.Put
             ]
         };
     }
