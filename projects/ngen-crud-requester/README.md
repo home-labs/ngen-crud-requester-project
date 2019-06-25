@@ -6,11 +6,11 @@
 
 ## Installing
 
-$ npm i ngen-crud-request --save
+$ npm i ngen-crud-requester --save
 
 ## Usage
 
-Import ```NGenCRUDRequestModule``` from ```ngen-crud-request``` in your module, and put in the key ```imports``` of metadata from```NgModule```, so import ```NGenCRUDRequest``` in your service and inject the ```GeneralService```, like that:
+Import ```NGenCRUDRequestModule``` from ```ngen-crud-requester``` in your module, and put in the key ```imports``` of metadata from```NgModule```, so import ```NGenCRUDRequest``` in your service and inject the ```GeneralService```, like that:
 
 
 ```typescript
@@ -26,7 +26,7 @@ export  class  YourModule { }
 ```
 
 ```typescript
-import { NGenCRUDRequest } from  'ngen-crud-request';
+import { NGenCRUDRequest } from  'ngen-crud-requester';
 
 
 @Injectable()
@@ -41,10 +41,10 @@ class  YourService {
 
 ### To use with a Model and the Abstract Factory Design Pattern
 
-Import ```NGenCRUDRequest``` from ```ngen-crud-request``` in your model and implement the method ```getConcrete``` implementing the interface ```NGenCRUDRequest.GenericAbstractProduct<T>```, like that:
+Import ```NGenCRUDRequest``` from ```ngen-crud-requester``` in your model and implement the method ```getConcrete``` implementing the interface ```NGenCRUDRequest.GenericAbstractProduct<T>```, like that:
 
 ```typescript
-import { NGenCRUDRequest } from  'ngen-crud-request';
+import { NGenCRUDRequest } from  'ngen-crud-requester';
 
 
 class  YourModel  implements  NGenCRUDRequest.GenericAbstractProduct<YourModel> {
@@ -59,7 +59,7 @@ class  YourModel  implements  NGenCRUDRequest.GenericAbstractProduct<YourModel> 
 So implements the method ```manufacture``` extending the abstract class ```NGenCRUDRequest.GenericAbstractService<YourModel>```, like that:
 
 ```typescript
-import { NGenCRUDRequest } from  'ngen-crud-request';
+import { NGenCRUDRequest } from  'ngen-crud-requester';
 
 
 @Injectable()

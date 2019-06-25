@@ -1,4 +1,5 @@
-import { NGenCRUDRequest } from 'ngen-crud-request';
+// import { NGenCRUDRequest } from 'ngen-crud-requester';
+import { NGenCRUDRequest } from 'projects/ngen-crud-requester/src/public_api';
 
 
 export class Example implements NGenCRUDRequest.GenericAbstractProduct<Example>  {

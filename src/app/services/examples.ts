@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-// import { NGenCRUDRequest } from 'ngen-crud-request';
-import { NGenCRUDRequest } from 'projects/ngen-crud-request/src/public_api';
+// import { NGenCRUDRequest } from 'ngen-crud-requester';
+import { NGenCRUDRequest } from 'projects/ngen-crud-requester/src/public_api';
 
 // import { Example } from '../models/example';
 
