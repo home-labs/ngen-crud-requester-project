@@ -22,6 +22,10 @@ export abstract class GenericAbstractService<T>
 
     abstract manufacture(response: Response): GenericAbstractProduct<T>;
 
+    protected create(url: string, data: Object, options?: Object): Promise<Response> {
+        return this.service.create(url, data, options);
+    }
+
     protected readProduct(url: string, options?: Object):
         Promise<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T> |
         Array<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T>>> {
@@ -66,10 +70,6 @@ export abstract class GenericAbstractService<T>
                 );
             }
         );
-    }
-
-    protected create(url: string, data: Object, options?: Object): Promise<Response> {
-        return this.service.create(url, data, options);
     }
 
     protected update(url: string, data: Object, options?: Object): Promise<Response> {
