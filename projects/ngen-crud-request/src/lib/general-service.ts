@@ -33,31 +33,6 @@ export class GeneralService {
         this.putStrategyContext = new Contexts.Send(this.putStrategy);
     }
 
-    private resolveURL(url: string) {
-        return url.trim().replace(/[\n]+/, '');
-    }
-
-    private composeQueryParams(url: string, params: Object): string {
-        let
-            composed = '';
-
-        Object.keys(params).forEach((k) => {
-            if (params[k]) {
-                composed += `${k}=${encodeURI(params[k])}&`;
-            }
-        });
-
-        composed = composed.slice(0, composed.length - 1);
-
-        if (url[url.length - 1] == '?') {
-            composed = `${url}&${composed}`;
-        } else {
-            composed = `${url}?${composed}`;
-        }
-
-        return composed;
-    }
-
     create(url: string, data: Object, options?: Object): Promise<Response> {
         return this.postStrategyContext.send(this.resolveURL(url), data, options);
     }
@@ -80,7 +55,7 @@ export class GeneralService {
         );
     }
 
-    protected search(url: string, params: Object, options?: Object): Promise<Array<Object>> {
+    search(url: string, params: Object, options?: Object): Promise<Array<Object>> {
         return new Promise(
             (accomplish: Function, reject: Function) => {
                 this.read(this.composeQueryParams(this.resolveURL(url), params), options).then(
@@ -114,6 +89,31 @@ export class GeneralService {
 
     destroy(url: string, options?: Object): Promise<Response> {
         return this.deleteStrategyContext.search(this.resolveURL(url), options);
+    }
+
+    private resolveURL(url: string) {
+        return url.trim().replace(/[\n]+/, '');
+    }
+
+    private composeQueryParams(url: string, params: Object): string {
+        let
+            composed = '';
+
+        Object.keys(params).forEach((k) => {
+            if (params[k]) {
+                composed += `${k}=${encodeURI(params[k])}&`;
+            }
+        });
+
+        composed = composed.slice(0, composed.length - 1);
+
+        if (url[url.length - 1] == '?') {
+            composed = `${url}&${composed}`;
+        } else {
+            composed = `${url}?${composed}`;
+        }
+
+        return composed;
     }
 
 }

@@ -1,10 +1,12 @@
+import { Injectable } from '@angular/core';
+
 import { NGenPattern } from 'ngen-pattern';
 
 import { GeneralService } from './general-service';
-
 import { GenericAbstractProduct } from './generic-abstract-product';
 
 
+@Injectable()
 export abstract class GenericAbstractService<T>
     implements NGenPattern.Creational.AbstractFactory.GenericAbstractFactory<T> {
 
@@ -52,18 +54,50 @@ export abstract class GenericAbstractService<T>
         Promise<Array<NGenPattern.Creational.AbstractFactory.GenericAbstractProduct<T>>> {
         return new Promise(
             (accomplish: Function, reject: Function) => {
-                // this.service.search(url, params, options).then(
-                //     (r: Array<Object>) => {
-                //         accomplish(this.factoryClient
-                //             .manufactureCollection(r));
-                //     }
-                // ).catch(
-                //     e => {
-                //         reject(e);
-                //     }
-                // );
+                this.service.search(url, params, options).then(
+                    (r: Array<Object>) => {
+                        accomplish(this.factoryClient
+                            .manufactureCollection(r));
+                    }
+                ).catch(
+                    e => {
+                        reject(e);
+                    }
+                );
             }
         );
+    }
+
+    create(url: string, data: Object, options?: Object): Promise<Response> {
+        return this.service.create(url, data, options);
+    }
+
+    read(url: string, options?: Object): Promise<Object> {
+        return new Promise(
+            (accomplish: Function, reject: Function) => {
+                this.service.search(url, options).then(
+                    (r: Object[]) => {
+                        accomplish(r);
+                    }
+                ).catch(
+                    e => {
+                        reject(e);
+                    }
+                );
+            }
+        );
+    }
+
+    update(url: string, data: Object, options?: Object): Promise<Response> {
+        return this.service.update(url, data, options);
+    }
+
+    put(url: string, data: Object, options?: Object): Promise<Response> {
+        return this.service.put(url, data, options);
+    }
+
+    destroy(url: string, options?: Object): Promise<Response> {
+        return this.service.destroy(url, options);
     }
 
 }
