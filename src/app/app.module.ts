@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-// import { NGenCRUDRequestModule } from 'ngen-crud-requester';
-import { NGenCRUDRequestModule } from 'projects/ngen-crud-requester/src/public_api';
+// import { NGenCRUDRequesterModule } from 'ngen-crud-requester';
+import { NGenCRUDRequesterModule } from 'projects/ngen-crud-requester/src/public_api';
 
 import { AppComponent } from './app.component';
 
@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 @NgModule({
     imports: [
         BrowserModule,
-        NGenCRUDRequestModule.forRoot()
+        NGenCRUDRequesterModule.forRoot()
     ],
     declarations: [
         AppComponent

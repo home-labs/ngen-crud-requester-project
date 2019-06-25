@@ -19,11 +19,11 @@ import { ModuleWithProviders } from '@angular/compiler/src/core';
         HttpClientModule
     ]
 })
-export class NGenCRUDRequestModule {
+export class NGenCRUDRequesterModule {
 
     static forRoot(): ModuleWithProviders {
         return {
-            ngModule: NGenCRUDRequestModule,
+            ngModule: NGenCRUDRequesterModule,
             providers: [
                 Search.Delete,
                 Search.Get,

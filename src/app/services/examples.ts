@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 
-// import { NGenCRUDRequest } from 'ngen-crud-requester';
-import { NGenCRUDRequest } from 'projects/ngen-crud-requester/src/public_api';
+// import { NGenCRUDRequester } from 'ngen-crud-requester';
+import { NGenCRUDRequester } from 'projects/ngen-crud-requester/src/public_api';
 
 // import { Example } from '../models/example';
 
 
 @Injectable()
 export class Examples
-                        // extends NGenCRUDRequest.GenericAbstractService<Example> {
-                        extends NGenCRUDRequest.GeneralService {
+                        // extends NGenCRUDRequester.GenericAbstractService<Example> {
+                        extends NGenCRUDRequester.GeneralService {
 
     // use a constructor will break the dependency injection chain
     // constructor(
@@ -18,7 +18,7 @@ export class Examples
     //     super();
     // }
 
-    // manufacture(response: Response): NGenCRUDRequest.GenericAbstractProduct<Example> {
+    // manufacture(response: Response): NGenCRUDRequester.GenericAbstractProduct<Example> {
     //     return new Example(response);
     // }
 

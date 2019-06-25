@@ -1,4 +1,4 @@
-# NGenCRUDRequest - Angular Generic RESTful to do CRUD
+# NGenCRUDRequester - Angular Generic RESTful to do CRUD
 
 ## Requirements
 
@@ -26,13 +26,13 @@ export  class  YourModule { }
 ```
 
 ```typescript
-import { NGenCRUDRequest } from  'ngen-crud-requester';
+import { NGenCRUDRequester } from  'ngen-crud-requester';
 
 
 @Injectable()
 class  YourService {
 
-    constructor(private  serviceHelp: NGenCRUDRequest.GeneralService) { }
+    constructor(private  serviceHelp: NGenCRUDRequester.GeneralService) { }
 
 }
 ```
@@ -41,13 +41,13 @@ class  YourService {
 
 ### To use with a Model and the Abstract Factory Design Pattern
 
-Import ```NGenCRUDRequest``` from ```ngen-crud-requester``` in your model and implement the method ```getConcrete``` implementing the interface ```NGenCRUDRequest.GenericAbstractProduct<T>```, like that:
+Import ```NGenCRUDRequest``` from ```ngen-crud-requester``` in your model and implement the method ```getConcrete``` implementing the interface ```NGenCRUDRequester.GenericAbstractProduct<T>```, like that:
 
 ```typescript
-import { NGenCRUDRequest } from  'ngen-crud-requester';
+import { NGenCRUDRequester } from  'ngen-crud-requester';
 
 
-class  YourModel  implements  NGenCRUDRequest.GenericAbstractProduct<YourModel> {
+class  YourModel  implements  NGenCRUDRequester.GenericAbstractProduct<YourModel> {
 
     getConcrete(): YourModel {
         return  this;
@@ -56,16 +56,16 @@ class  YourModel  implements  NGenCRUDRequest.GenericAbstractProduct<YourModel> 
 }
 ```
 
-So implements the method ```manufacture``` extending the abstract class ```NGenCRUDRequest.GenericAbstractService<YourModel>```, like that:
+So implements the method ```manufacture``` extending the abstract class ```NGenCRUDRequester.GenericAbstractService<YourModel>```, like that:
 
 ```typescript
-import { NGenCRUDRequest } from  'ngen-crud-requester';
+import { NGenCRUDRequester } from  'ngen-crud-requester';
 
 
 @Injectable()
-class  YourService  extends  NGenCRUDRequest.GenericAbstractService<YourModel> {
+class  YourService  extends  NGenCRUDRequester.GenericAbstractService<YourModel> {
 
-    manufacture(response: Response): NGenCRUDRequest.GenericAbstractProduct<YourModel> {
+    manufacture(response: Response): NGenCRUDRequester.GenericAbstractProduct<YourModel> {
 
         return  new  YourModel();
 

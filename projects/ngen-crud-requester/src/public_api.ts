@@ -1,4 +1,4 @@
-import * as NGenCRUDRequest from './lib';
-export { NGenCRUDRequest };
+import * as NGenCRUDRequester from './lib';
+export { NGenCRUDRequester };
 
-export { NGenCRUDRequestModule } from './lib/module';
+export { NGenCRUDRequesterModule } from './lib/module';
