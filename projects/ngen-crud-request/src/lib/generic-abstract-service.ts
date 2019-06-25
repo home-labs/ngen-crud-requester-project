@@ -68,35 +68,19 @@ export abstract class GenericAbstractService<T>
         );
     }
 
-    create(url: string, data: Object, options?: Object): Promise<Response> {
+    protected create(url: string, data: Object, options?: Object): Promise<Response> {
         return this.service.create(url, data, options);
     }
 
-    read(url: string, options?: Object): Promise<Object> {
-        return new Promise(
-            (accomplish: Function, reject: Function) => {
-                this.service.search(url, options).then(
-                    (r: Object[]) => {
-                        accomplish(r);
-                    }
-                ).catch(
-                    e => {
-                        reject(e);
-                    }
-                );
-            }
-        );
-    }
-
-    update(url: string, data: Object, options?: Object): Promise<Response> {
+    protected update(url: string, data: Object, options?: Object): Promise<Response> {
         return this.service.update(url, data, options);
     }
 
-    put(url: string, data: Object, options?: Object): Promise<Response> {
+    protected put(url: string, data: Object, options?: Object): Promise<Response> {
         return this.service.put(url, data, options);
     }
 
-    destroy(url: string, options?: Object): Promise<Response> {
+    protected destroy(url: string, options?: Object): Promise<Response> {
         return this.service.destroy(url, options);
     }
 
