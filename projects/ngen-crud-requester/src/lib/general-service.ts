@@ -20,7 +20,7 @@ export class GeneralService {
     private putStrategyContext: Contexts.Send;
 
     constructor(
-        private injector?: Injector
+        private injector: Injector
     ) {
         this.deleteStrategyContext = new Contexts.Search(this.injector.get(Search.Delete));
         this.getStrategyContext = new Contexts.Search(this.injector.get(Search.Get));
