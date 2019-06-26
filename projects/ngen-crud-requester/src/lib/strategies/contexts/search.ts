@@ -5,7 +5,7 @@ import { AbstractSearch } from '../search/abstract-search';
 export class Search {
 
     constructor(
-        private strategy?: AbstractSearch
+        private strategy: AbstractSearch
     ) { }
 
     search(url: string, options?: Object): Promise<Response> {

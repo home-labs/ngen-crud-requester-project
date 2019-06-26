@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export abstract class AbstractSearch {
 
     constructor(
-        private http?: HttpClient
+        private http: HttpClient
     ) { }
 
     search(url: string, options?: Object, method?: 'get' | 'delete'): Promise<Response> {

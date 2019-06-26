@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 export abstract class AbstractSend {
 
     constructor(
-        private http?: HttpClient
+        private http: HttpClient
     ) { }
 
     send(url: string, data: Object, options?: Object, method?: 'post' | 'put' | 'patch'): Promise<Response> {
