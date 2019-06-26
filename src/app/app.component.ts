@@ -5,10 +5,7 @@ import { Services } from './services/namespace';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.sass'],
-    providers: [
-        Services.Examples
-    ]
+    styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
 

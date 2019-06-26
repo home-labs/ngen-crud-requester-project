@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-
 import {
-    Search
-} from './strategies/search/namespace';
-import {
-    Send
-} from './strategies/send/namespace';
+    NgModule,
+    ModuleWithProviders
+} from '@angular/core';
+import { HttpClientModule, HttpHandler } from '@angular/common/http';
 
-import { ModuleWithProviders } from '@angular/compiler/src/core';
+import { Delete } from './strategies/search/delete';
+import { Get } from './strategies/search/get';
+import { Patch } from './strategies/send/patch';
+import { Post } from './strategies/send/post';
+import { Put } from './strategies/send/put';
 
 
 @NgModule({
@@ -16,7 +16,7 @@ import { ModuleWithProviders } from '@angular/compiler/src/core';
         HttpClientModule
     ],
     exports: [
-        HttpClientModule
+
     ]
 })
 export class NGenCRUDRequesterModule {
@@ -25,11 +25,11 @@ export class NGenCRUDRequesterModule {
         return {
             ngModule: NGenCRUDRequesterModule,
             providers: [
-                Search.Delete,
-                Search.Get,
-                Send.Patch,
-                Send.Post,
-                Send.Put
+                Delete,
+                Get,
+                Patch,
+                Post,
+                Put
             ]
         };
     }

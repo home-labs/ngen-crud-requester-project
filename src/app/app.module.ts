@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { NGenCRUDRequesterModule } from 'ngen-crud-requester';
 
 import { AppComponent } from './app.component';
+import { Services } from './services/namespace';
 
 
 @NgModule({
@@ -15,7 +16,9 @@ import { AppComponent } from './app.component';
     declarations: [
         AppComponent
     ],
-    providers: [],
+    providers: [
+        Services.Examples
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,7 @@
 import {
     Injectable,
-    Injector
+    Injector,
+    Inject
 } from '@angular/core';
 
 import { Contexts } from './strategies/contexts/namespace';
@@ -22,15 +23,40 @@ export class GeneralService {
 
     private putStrategyContext: Contexts.Send;
 
-    constructor(
-        private injector: Injector
-    ) {
-        this.deleteStrategyContext = new Contexts.Search(this.injector.get(Search.Delete));
-        this.getStrategyContext = new Contexts.Search(this.injector.get(Search.Get));
+    constructor() {
+        const
+            injector = Injector.create(
+                {
+                    providers: [
+                        {
+                            provide: Search.Delete,
+                            deps: []
+                        },
+                        {
+                            provide: Search.Get,
+                            deps: []
+                        },
+                        {
+                            provide: Send.Patch,
+                            deps: []
+                        },
+                        {
+                            provide: Send.Post,
+                            deps: []
+                        },
+                        {
+                            provide: Send.Put,
+                            deps: []
+                        }
+                    ]
+                }
+            );
+        this.deleteStrategyContext = new Contexts.Search(injector.get(Search.Delete));
+        this.getStrategyContext = new Contexts.Search(injector.get(Search.Get));
 
-        this.patchStrategyContext = new Contexts.Send(this.injector.get(Send.Patch));
-        this.postStrategyContext = new Contexts.Send(this.injector.get(Send.Post));
-        this.putStrategyContext = new Contexts.Send(this.injector.get(Send.Put));
+        this.patchStrategyContext = new Contexts.Send(injector.get(Send.Patch));
+        this.postStrategyContext = new Contexts.Send(injector.get(Send.Post));
+        this.putStrategyContext = new Contexts.Send(injector.get(Send.Put));
     }
 
     create(url: string, data: Object, options?: Object): Promise<Response> {
