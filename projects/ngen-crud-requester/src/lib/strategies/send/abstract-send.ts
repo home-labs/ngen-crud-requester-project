@@ -1,20 +1,18 @@
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 
+@Injectable()
 export abstract class AbstractSend {
 
-    private _http: HttpClient;
-
     constructor(
-        http: HttpClient
-    ) {
-        this._http = http;
-    }
+        private http?: HttpClient
+    ) { }
 
     send(url: string, data: Object, options?: Object, method?: 'post' | 'put' | 'patch'): Promise<Response> {
         return new Promise(
             (accomplish: Function, reject: Function) => {
-                this._http[method](url, data, options).subscribe(
+                this.http[method](url, data, options).subscribe(
                     (r: Response) => {
                         accomplish(r);
                     },

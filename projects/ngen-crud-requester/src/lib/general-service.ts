@@ -1,10 +1,9 @@
 import {
     Injectable,
-    Inject
+    Injector
 } from '@angular/core';
 
 import { Contexts } from './strategies/contexts/namespace';
-import { Strategies } from './strategies/namespace';
 // use a namespace with two or more nested names as a property kind generated a error when the compiler was doing "build"
 import { Search } from './strategies/search/namespace';
 import { Send } from './strategies/send/namespace';
@@ -21,18 +20,14 @@ export class GeneralService {
     private putStrategyContext: Contexts.Send;
 
     constructor(
-        @Inject(Strategies.Search.Delete) private deleteStrategy?: Search.Delete,
-        @Inject(Strategies.Search.Get) private getStrategy?: Search.Get,
-        @Inject(Strategies.Send.Patch) private patchStrategy?: Send.Patch,
-        @Inject(Strategies.Send.Post) private postStrategy?: Send.Post,
-        @Inject(Strategies.Send.Put) private putStrategy?: Send.Put
+        private injector?: Injector
     ) {
-        this.deleteStrategyContext = new Contexts.Search(this.deleteStrategy);
-        this.getStrategyContext = new Contexts.Search(this.getStrategy);
+        this.deleteStrategyContext = new Contexts.Search(this.injector.get(Search.Delete));
+        this.getStrategyContext = new Contexts.Search(this.injector.get(Search.Get));
 
-        this.patchStrategyContext = new Contexts.Send(this.patchStrategy);
-        this.postStrategyContext = new Contexts.Send(this.postStrategy);
-        this.putStrategyContext = new Contexts.Send(this.putStrategy);
+        this.patchStrategyContext = new Contexts.Send(this.injector.get(Send.Patch));
+        this.postStrategyContext = new Contexts.Send(this.injector.get(Send.Post));
+        this.putStrategyContext = new Contexts.Send(this.injector.get(Send.Put));
     }
 
     create(url: string, data: Object, options?: Object): Promise<Response> {

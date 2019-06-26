@@ -6,18 +6,14 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export abstract class AbstractSearch {
 
-    private _http: HttpClient;
-
     constructor(
-        private http: HttpClient
-    ) {
-        this._http = this.http;
-    }
+        private http?: HttpClient
+    ) { }
 
     search(url: string, options?: Object, method?: 'get' | 'delete'): Promise<Response> {
         return new Promise(
             (accomplish: Function, reject: Function) => {
-                this._http[method](url, options).subscribe(
+                this.http[method](url, options).subscribe(
                     (r: Response | null) => {
                         if (r) {
                             accomplish(r);
