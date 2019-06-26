@@ -13,10 +13,13 @@ import { Send } from './strategies/send/namespace';
 export class GeneralService {
 
     private deleteStrategyContext: Contexts.Search;
+
     private getStrategyContext: Contexts.Search;
 
     private patchStrategyContext: Contexts.Send;
+
     private postStrategyContext: Contexts.Send;
+
     private putStrategyContext: Contexts.Send;
 
     constructor(
