@@ -4,9 +4,10 @@ import {
 } from '@angular/core';
 
 import {
-    HttpClient,
+    // ɵHttpInterceptingHandler,
+    HttpHandler,
     HttpXhrBackend,
-    HttpHandler
+    HttpClient
 } from '@angular/common/http';
 
 
@@ -16,7 +17,10 @@ export abstract class AbstractSearch {
 
     private _http: HttpClient;
 
-    constructor() {
+    constructor(
+        private http?: HttpClient
+    ) {
+        // debugger
         const
             injector: Injector = Injector.create(
                 {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 // import { NGenCRUDRequester } from 'projects/ngen-crud-requester/src/public_api';
 import { NGenCRUDRequester } from 'ngen-crud-requester';
+import { HttpClient } from '@angular/common/http';
 
 // import { Example } from '../models/example';
 
@@ -12,11 +13,13 @@ export class Examples
                         extends NGenCRUDRequester.GeneralService {
 
     // use a constructor will break the dependency injection chain
-    // constructor(
-
-    // ) {
-    //     super();
-    // }
+    constructor(
+        private http: HttpClient
+    ) {
+        // super(http);
+        super();
+        debugger
+    }
 
     // manufacture(response: Response): NGenCRUDRequester.GenericAbstractProduct<Example> {
     //     return new Example(response);

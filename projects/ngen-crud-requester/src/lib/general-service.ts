@@ -1,13 +1,13 @@
 import {
     Injectable,
-    Injector,
-    Inject
+    Injector
 } from '@angular/core';
 
 import { Contexts } from './strategies/contexts/namespace';
 // use a namespace with two or more nested names as a property kind generated a error when the compiler was doing "build"
 import { Search } from './strategies/search/namespace';
 import { Send } from './strategies/send/namespace';
+// import { HttpClient } from '@angular/common/http';
 
 
 @Injectable()
@@ -23,7 +23,9 @@ export class GeneralService {
 
     private putStrategyContext: Contexts.Send;
 
-    constructor() {
+    constructor(
+
+    ) {
         const
             injector = Injector.create(
                 {
