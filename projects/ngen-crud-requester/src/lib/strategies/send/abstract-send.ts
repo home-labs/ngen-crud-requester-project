@@ -6,13 +6,13 @@ import { HttpClient } from '@angular/common/http';
 export abstract class AbstractSend {
 
     constructor(
-        private http: HttpClient
+        private _http: HttpClient
     ) { }
 
     send(url: string, data: Object, options?: Object, method?: 'post' | 'put' | 'patch'): Promise<Response> {
         return new Promise(
             (accomplish: Function, reject: Function) => {
-                this.http[method](url, data, options).subscribe(
+                this._http[method](url, data, options).subscribe(
                     (r: Response) => {
                         accomplish(r);
                     },

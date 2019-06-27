@@ -14,11 +14,9 @@ export class Examples
 
     // use a constructor will break the dependency injection chain
     constructor(
-        private http: HttpClient
+        http: HttpClient
     ) {
-        // super(http);
-        super();
-        debugger
+        super(http);
     }
 
     // manufacture(response: Response): NGenCRUDRequester.GenericAbstractProduct<Example> {

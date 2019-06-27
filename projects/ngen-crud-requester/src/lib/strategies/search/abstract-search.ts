@@ -1,48 +1,16 @@
 import {
-    Injectable,
-    Injector
+    Injectable
 } from '@angular/core';
-
-import {
-    // ɵHttpInterceptingHandler,
-    HttpHandler,
-    HttpXhrBackend,
-    HttpClient
-} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 
 // Abstract Strategy
 @Injectable()
 export abstract class AbstractSearch {
 
-    private _http: HttpClient;
-
     constructor(
-        private http?: HttpClient
-    ) {
-        // debugger
-        const
-            injector: Injector = Injector.create(
-                {
-                    providers: [
-                        {
-                            provide: HttpHandler,
-                            useValue: new HttpXhrBackend(
-                                {
-                                    build: () => new XMLHttpRequest
-                                }
-                            )
-                        },
-                        {
-                            provide: HttpClient,
-                            deps: [HttpHandler]
-                        }
-                    ]
-                }
-            );
-
-        this._http = injector.get(HttpClient);
-    }
+        private _http: HttpClient
+    ) { }
 
     search(url: string, options?: Object, method?: 'get' | 'delete'): Promise<Response> {
         return new Promise(

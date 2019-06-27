@@ -3,11 +3,16 @@ import {
     Injector
 } from '@angular/core';
 
+import {
+    HttpHandler,
+    HttpXhrBackend,
+    HttpClient
+} from '@angular/common/http';
+
 import { Contexts } from './strategies/contexts/namespace';
 // use a namespace with two or more nested names as a property kind generated a error when the compiler was doing "build"
 import { Search } from './strategies/search/namespace';
 import { Send } from './strategies/send/namespace';
-// import { HttpClient } from '@angular/common/http';
 
 
 @Injectable()
@@ -24,41 +29,77 @@ export class GeneralService {
     private putStrategyContext: Contexts.Send;
 
     constructor(
-
+        _http: HttpClient
     ) {
+
         const
-            injector = Injector.create(
+            injector: Injector = Injector.create(
                 {
                     providers: [
                         {
+                            provide: HttpHandler,
+                            useValue: new HttpXhrBackend(
+                                {
+                                    build: () => new XMLHttpRequest
+                                }
+                            )
+                        },
+                        {
+                            provide: HttpClient,
+                            deps: [HttpHandler]
+                        },
+                        {
                             provide: Search.Delete,
-                            deps: []
+                            deps: [HttpClient]
                         },
                         {
                             provide: Search.Get,
-                            deps: []
+                            deps: [HttpClient]
                         },
                         {
                             provide: Send.Patch,
-                            deps: []
+                            deps: [HttpClient]
                         },
                         {
                             provide: Send.Post,
-                            deps: []
+                            deps: [HttpClient]
                         },
                         {
                             provide: Send.Put,
-                            deps: []
+                            deps: [HttpClient]
                         }
                     ]
                 }
             );
-        this.deleteStrategyContext = new Contexts.Search(injector.get(Search.Delete));
-        this.getStrategyContext = new Contexts.Search(injector.get(Search.Get));
 
-        this.patchStrategyContext = new Contexts.Send(injector.get(Send.Patch));
-        this.postStrategyContext = new Contexts.Send(injector.get(Send.Post));
-        this.putStrategyContext = new Contexts.Send(injector.get(Send.Put));
+        let
+            contextSearchDeleteInstance: Search.Delete,
+            contextSearchGetInstance: Search.Get,
+            contextSearchPatchInstance: Send.Patch,
+            contextSearchPostInstance: Send.Post,
+            contextSearchPutInstance: Send.Put
+        ;
+
+        if (_http) {
+            contextSearchDeleteInstance = new Search.Delete(_http);
+            contextSearchGetInstance = new Search.Get(_http);
+            contextSearchPatchInstance = new Send.Patch(_http);
+            contextSearchPostInstance = new Send.Post(_http);
+            contextSearchPutInstance = new Send.Put(_http);
+        } else {
+            contextSearchDeleteInstance = injector.get(Search.Delete);
+            contextSearchGetInstance = injector.get(Search.Get);
+            contextSearchPatchInstance = injector.get(Send.Patch);
+            contextSearchPostInstance = injector.get(Send.Post);
+            contextSearchPutInstance = injector.get(Send.Put);
+        }
+
+        this.deleteStrategyContext = new Contexts.Search(contextSearchDeleteInstance);
+        this.getStrategyContext = new Contexts.Search(contextSearchGetInstance);
+
+        this.patchStrategyContext = new Contexts.Send(contextSearchPatchInstance);
+        this.postStrategyContext = new Contexts.Send(contextSearchPostInstance);
+        this.putStrategyContext = new Contexts.Send(contextSearchPutInstance);
     }
 
     create(url: string, data: Object, options?: Object): Promise<Response> {
