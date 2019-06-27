@@ -80,7 +80,7 @@
 //         return this.service.put(url, data, options);
 //     }
 
-//     protected destroy(url: string, options?: Object): Promise<Response> {
+//     protected delete(url: string, options?: Object): Promise<Response> {
 //         return this.service.destroy(url, options);
 //     }
 

@@ -113,7 +113,7 @@ export class GeneralService {
         return this.putStrategyContext.send(this.resolveURL(url), data, options);
     }
 
-    destroy(url: string, options?: Object): Promise<Response> {
+    delete(url: string, options?: Object): Promise<Response> {
         return this.deleteStrategyContext.search(this.resolveURL(url), options);
     }
 
