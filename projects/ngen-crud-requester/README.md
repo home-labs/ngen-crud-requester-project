@@ -1,4 +1,4 @@
-# NGenCRUDRequester - Angular Generic RESTful to do CRUD
+# NGenCRUDRequester - Angular Generic Requester to do CRUD
 
 ## Requirements
 
@@ -10,14 +10,13 @@ $ npm i ngen-crud-requester --save
 
 ## Usage
 
-Import ```NGenCRUDRequestModule``` from ```ngen-crud-requester``` in your module, and put in the key ```imports``` of metadata from```NgModule```, so import ```NGenCRUDRequest``` in your service and inject the ```GeneralService```, like that:
-
+Import ```NGenCRUDRequesterModule``` from ```ngen-crud-requester``` in your module, and put in the key ```imports``` of metadata from```NgModule```, so import ```NGenCRUDRequester``` in your service and inject the ```GeneralService```, like that:
 
 ```typescript
 @NgModule({
 
     imports: [
-        NGenCRUDRequestModule
+        NGenCRUDRequesterModule
     ]
 
 })
@@ -36,3 +35,4 @@ class  YourService {
 
 }
 ```
+
