@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 // import { NGenCRUDRequester } from 'projects/ngen-crud-requester/src/public_api';
 import { NGenCRUDRequester } from 'ngen-crud-requester';
@@ -21,6 +21,7 @@ export class Examples extends NGenCRUDRequester.GeneralService {
     // constructor(
     //     http: HttpClient
     // ) {
+    //     super();
     //     console.log(http);
     // }
 

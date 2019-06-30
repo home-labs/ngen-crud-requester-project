@@ -8,7 +8,9 @@ import { AppComponent } from './app.component';
 import { NGenCRUDRequesterModule } from 'ngen-crud-requester';
 
 // never use a namespace in a Angular module declaration
-import { Examples } from './services';
+// import { Services } from './services/namespace';
+
+import * as Services from './services';
 
 
 @NgModule({
@@ -21,7 +23,7 @@ import { Examples } from './services';
         AppComponent
     ],
     providers: [
-        Examples
+        Services.Examples
     ],
     bootstrap: [AppComponent]
 })
