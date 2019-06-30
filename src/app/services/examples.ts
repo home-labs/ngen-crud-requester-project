@@ -1,4 +1,4 @@
-import { Injectable, StaticProvider } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 // import { NGenCRUDRequester } from 'projects/ngen-crud-requester/src/public_api';
 import { NGenCRUDRequester } from 'ngen-crud-requester';
