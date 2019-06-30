@@ -1,14 +1,17 @@
 import {
     NgModule,
-    ModuleWithProviders
+    ModuleWithProviders,
+    Injector
 } from '@angular/core';
-import { HttpClientModule, HttpHandler } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { Delete } from './strategies/search/delete';
 import { Get } from './strategies/search/get';
 import { Patch } from './strategies/send/patch';
 import { Post } from './strategies/send/post';
 import { Put } from './strategies/send/put';
+
+export let injectorReference: Injector;
 
 
 @NgModule({
@@ -32,6 +35,10 @@ export class NGenCRUDRequesterModule {
                 Put
             ]
         };
+    }
+
+    constructor(injector: Injector) {
+        injectorReference = injector;
     }
 
 }

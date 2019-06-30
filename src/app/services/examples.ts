@@ -1,11 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, StaticProvider } from '@angular/core';
 
 // import { NGenCRUDRequester } from 'projects/ngen-crud-requester/src/public_api';
 import { NGenCRUDRequester } from 'ngen-crud-requester';
-import { HttpClient } from '@angular/common/http';
 
-// import { Example } from '../models/example';
+// @Injectable()
+// class ConcreteHttpInterceptor implements HttpInterceptor {
 
+//     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+//         // console.log(req.urlWithParams);
+//         return next.handle(request);
+//     }
+
+// }
 
 @Injectable()
 export class Examples
@@ -13,11 +19,9 @@ export class Examples
                         extends NGenCRUDRequester.GeneralService {
 
     // use a constructor will break the dependency injection chain
-    constructor(
-        http: HttpClient
-    ) {
-        super(http);
-    }
+    // constructor(
+    // ) {
+    // }
 
     // manufacture(response: Response): NGenCRUDRequester.GenericAbstractProduct<Example> {
     //     return new Example(response);

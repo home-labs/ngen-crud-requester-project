@@ -1,11 +1,8 @@
 import {
-    Injectable,
-    Injector
+    Injectable
 } from '@angular/core';
 
 import {
-    HttpHandler,
-    HttpXhrBackend,
     HttpClient
 } from '@angular/common/http';
 
@@ -13,6 +10,8 @@ import { Contexts } from './strategies/contexts/namespace';
 // use a namespace with two or more nested names as a property kind generated a error when the compiler was doing "build"
 import { Search } from './strategies/search/namespace';
 import { Send } from './strategies/send/namespace';
+
+import { injectorReference } from './module';
 
 
 @Injectable()
@@ -29,70 +28,17 @@ export class GeneralService {
     private putStrategyContext: Contexts.Send;
 
     constructor(
-        _http: HttpClient
+
     ) {
 
         const
-            injector: Injector = Injector.create(
-                {
-                    providers: [
-                        {
-                            provide: HttpHandler,
-                            useValue: new HttpXhrBackend(
-                                {
-                                    build: () => new XMLHttpRequest
-                                }
-                            )
-                        },
-                        {
-                            provide: HttpClient,
-                            deps: [HttpHandler]
-                        },
-                        {
-                            provide: Search.Delete,
-                            deps: [HttpClient]
-                        },
-                        {
-                            provide: Search.Get,
-                            deps: [HttpClient]
-                        },
-                        {
-                            provide: Send.Patch,
-                            deps: [HttpClient]
-                        },
-                        {
-                            provide: Send.Post,
-                            deps: [HttpClient]
-                        },
-                        {
-                            provide: Send.Put,
-                            deps: [HttpClient]
-                        }
-                    ]
-                }
-            );
-
-        let
-            contextSearchDeleteInstance: Search.Delete,
-            contextSearchGetInstance: Search.Get,
-            contextSearchPatchInstance: Send.Patch,
-            contextSearchPostInstance: Send.Post,
-            contextSearchPutInstance: Send.Put
+            http = injectorReference.get(HttpClient),
+            contextSearchDeleteInstance: Search.Delete = new Search.Delete(http),
+            contextSearchGetInstance: Search.Get = new Search.Get(http),
+            contextSearchPatchInstance: Send.Patch = new Send.Patch(http),
+            contextSearchPostInstance: Send.Post = new Send.Post(http),
+            contextSearchPutInstance: Send.Put = new Send.Put(http)
         ;
-
-        if (_http) {
-            contextSearchDeleteInstance = new Search.Delete(_http);
-            contextSearchGetInstance = new Search.Get(_http);
-            contextSearchPatchInstance = new Send.Patch(_http);
-            contextSearchPostInstance = new Send.Post(_http);
-            contextSearchPutInstance = new Send.Put(_http);
-        } else {
-            contextSearchDeleteInstance = injector.get(Search.Delete);
-            contextSearchGetInstance = injector.get(Search.Get);
-            contextSearchPatchInstance = injector.get(Send.Patch);
-            contextSearchPostInstance = injector.get(Send.Post);
-            contextSearchPutInstance = injector.get(Send.Put);
-        }
 
         this.deleteStrategyContext = new Contexts.Search(contextSearchDeleteInstance);
         this.getStrategyContext = new Contexts.Search(contextSearchGetInstance);
