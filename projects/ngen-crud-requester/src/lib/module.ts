@@ -11,7 +11,7 @@ import { Patch } from './strategies/send/patch';
 import { Post } from './strategies/send/post';
 import { Put } from './strategies/send/put';
 
-export let injectorReference: Injector;
+export let injectorSingletonReference: Injector;
 
 
 @NgModule({
@@ -37,8 +37,10 @@ export class NGenCRUDRequesterModule {
         };
     }
 
-    constructor(injector: Injector) {
-        injectorReference = injector;
+    constructor(
+        injector: Injector
+    ) {
+        injectorSingletonReference = injector;
     }
 
 }

@@ -1,20 +1,11 @@
-import {
-    Injectable
-} from '@angular/core';
-
-import {
-    HttpClient
-} from '@angular/common/http';
-
 import { Contexts } from './strategies/contexts/namespace';
 // use a namespace with two or more nested names as a property kind generated a error when the compiler was doing "build"
 import { Search } from './strategies/search/namespace';
 import { Send } from './strategies/send/namespace';
 
-import { injectorReference } from './module';
+import { injectorSingletonReference } from './module';
 
 
-@Injectable()
 export class GeneralService {
 
     private deleteStrategyContext: Contexts.Search;
@@ -30,22 +21,12 @@ export class GeneralService {
     constructor(
 
     ) {
+        this.deleteStrategyContext = new Contexts.Search(injectorSingletonReference.get(Search.Delete));
+        this.getStrategyContext = new Contexts.Search(injectorSingletonReference.get(Search.Get));
 
-        const
-            http = injectorReference.get(HttpClient),
-            contextSearchDeleteInstance: Search.Delete = new Search.Delete(http),
-            contextSearchGetInstance: Search.Get = new Search.Get(http),
-            contextSearchPatchInstance: Send.Patch = new Send.Patch(http),
-            contextSearchPostInstance: Send.Post = new Send.Post(http),
-            contextSearchPutInstance: Send.Put = new Send.Put(http)
-        ;
-
-        this.deleteStrategyContext = new Contexts.Search(contextSearchDeleteInstance);
-        this.getStrategyContext = new Contexts.Search(contextSearchGetInstance);
-
-        this.patchStrategyContext = new Contexts.Send(contextSearchPatchInstance);
-        this.postStrategyContext = new Contexts.Send(contextSearchPostInstance);
-        this.putStrategyContext = new Contexts.Send(contextSearchPutInstance);
+        this.patchStrategyContext = new Contexts.Send(injectorSingletonReference.get(Send.Patch));
+        this.postStrategyContext = new Contexts.Send(injectorSingletonReference.get(Send.Post));
+        this.putStrategyContext = new Contexts.Send(injectorSingletonReference.get(Send.Put));
     }
 
     create(url: string, data: Object, options?: Object): Promise<Response> {
