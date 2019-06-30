@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { Services } from './services/namespace';
 
+
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -14,7 +15,7 @@ export class AppComponent {
     constructor(
         examplesService: Services.Examples
     ) {
-        examplesService.searchProxy({}).then(
+        examplesService.search({}).then(
             (r: Array<Object>) => {
                 this.collection = r;
             }
