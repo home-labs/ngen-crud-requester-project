@@ -29,15 +29,15 @@ export class GeneralService {
         this.putStrategyContext = new Contexts.Send(injectorSingletonReference.get(Send.Put));
     }
 
-    create(url: string, data: Object, options?: Object): Promise<Response> {
+    create(url: string, data: object, options?: object): Promise<Response> {
         return this.postStrategyContext.send(this.resolveURL(url), data, options);
     }
 
-    // An Array is a Object, so it isn't necessary specify a Array<Object> as return
-    // more generic than parent (Response is an Object)
-    read(url: string, options?: Object): Promise<Object> {
+    // An Array is a object, so it isn't necessary specify a Array<object> as return
+    // more generic than parent (Response is an object)
+    read(url: string, options?: object): Promise<object> {
         return new Promise(
-            (accomplish: Function, reject: Function) => {
+            (accomplish: (r: Response) => void, reject: (e: any) => void) => {
                 this.getStrategyContext.search(url, options).then(
                     (r: Response) => {
                         accomplish(r);
@@ -51,12 +51,12 @@ export class GeneralService {
         );
     }
 
-    search(url: string, params: Object, options?: Object): Promise<Array<Object>> {
+    search(url: string, params: object, options?: object): Promise<Array<object>> {
         return new Promise(
-            (accomplish: Function, reject: Function) => {
+            (accomplish: (r: object[]) => void, reject: (e: any) => void) => {
                 this.read(this.composeQueryParams(this.resolveURL(url), params), options).then(
-                        (r: Array<Object> | null) => {
-                            if (r && typeof r == 'object') {
+                        (r: Array<object> | null) => {
+                            if (r && typeof r === 'object') {
                                 if (r instanceof Array) {
                                     accomplish(r);
                                 } else {
@@ -75,15 +75,15 @@ export class GeneralService {
         );
     }
 
-    update(url: string, data: Object, options?: Object): Promise<Response> {
+    update(url: string, data: object, options?: object): Promise<Response> {
         return this.patchStrategyContext.send(this.resolveURL(url), data, options);
     }
 
-    put(url: string, data: Object, options?: Object): Promise<Response> {
+    put(url: string, data: object, options?: object): Promise<Response> {
         return this.putStrategyContext.send(this.resolveURL(url), data, options);
     }
 
-    delete(url: string, options?: Object): Promise<Response> {
+    delete(url: string, options?: object): Promise<Response> {
         return this.deleteStrategyContext.search(this.resolveURL(url), options);
     }
 
@@ -91,7 +91,7 @@ export class GeneralService {
         return url.trim().replace(/[\n]+/, '');
     }
 
-    private composeQueryParams(url: string, params: Object): string {
+    private composeQueryParams(url: string, params: object): string {
         let
             composed = '';
 
@@ -103,7 +103,7 @@ export class GeneralService {
 
         composed = composed.slice(0, composed.length - 1);
 
-        if (url[url.length - 1] == '?') {
+        if (url[url.length - 1] === '?') {
             composed = `${url}&${composed}`;
         } else {
             composed = `${url}?${composed}`;
