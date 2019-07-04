@@ -9,13 +9,13 @@ import { HttpClient } from '@angular/common/http';
 export abstract class AbstractSearch {
 
     constructor(
-        private _http: HttpClient
+        private http: HttpClient
     ) { }
 
-    search(url: string, options?: Object, method?: 'get' | 'delete'): Promise<Response> {
+    search(url: string, options?: object, method?: 'get' | 'delete'): Promise<Response> {
         return new Promise(
-            (accomplish: Function, reject: Function) => {
-                this._http[method](url, options).subscribe(
+            (accomplish: (r: Response) => void, reject: (e: any) => void) => {
+                this.http[method](url, options).subscribe(
                     (r: Response | null) => {
                         if (r) {
                             accomplish(r);
