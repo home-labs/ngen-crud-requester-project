@@ -29,13 +29,13 @@ export class GeneralService {
         this.putStrategyContext = new Contexts.Send(injectorSingletonReference.get(Send.Put));
     }
 
-    create(url: string, data: object, options?: object): Promise<Response> {
+    protected create(url: string, data: object, options?: object): Promise<Response> {
         return this.postStrategyContext.send(this.resolveURL(url), data, options);
     }
 
     // An Array is a object, so it isn't necessary specify a Array<object> as return
     // more generic than parent (Response is an object)
-    read(url: string, options?: object): Promise<object> {
+    protected read(url: string, options?: object): Promise<object> {
         return new Promise(
             (accomplish: (r: Response) => void, reject: (e: any) => void) => {
                 this.getStrategyContext.search(url, options).then(
@@ -51,7 +51,7 @@ export class GeneralService {
         );
     }
 
-    search(url: string, params: object, options?: object): Promise<Array<object>> {
+    protected search(url: string, params: object, options?: object): Promise<Array<object>> {
         return new Promise(
             (accomplish: (r: object[]) => void, reject: (e: any) => void) => {
                 this.read(this.composeQueryParams(this.resolveURL(url), params), options).then(
@@ -75,15 +75,15 @@ export class GeneralService {
         );
     }
 
-    update(url: string, data: object, options?: object): Promise<Response> {
+    protected update(url: string, data: object, options?: object): Promise<Response> {
         return this.patchStrategyContext.send(this.resolveURL(url), data, options);
     }
 
-    put(url: string, data: object, options?: object): Promise<Response> {
+    protected put(url: string, data: object, options?: object): Promise<Response> {
         return this.putStrategyContext.send(this.resolveURL(url), data, options);
     }
 
-    delete(url: string, options?: object): Promise<Response> {
+    protected delete(url: string, options?: object): Promise<Response> {
         return this.deleteStrategyContext.search(this.resolveURL(url), options);
     }
 
@@ -91,17 +91,34 @@ export class GeneralService {
         return url.trim().replace(/[\n]+/, '');
     }
 
+    private resolveQueryParamAsArray(queryParamName: string, queryParamValue: any[]): string {
+        let composed = '';
+
+        queryParamValue.forEach(
+            (value) => {
+                composed += `${queryParamName}=${encodeURI(value)}&`;
+            }
+        );
+
+        composed = composed.slice(0, composed.length - 1);
+
+        return composed;
+    }
+
     private composeQueryParams(url: string, params: object): string {
-        let
-            composed = '';
+
+        let composed = '';
 
         Object.keys(params).forEach((k) => {
             if (params[k]) {
-                composed += `${k}=${encodeURI(params[k])}&`;
+                if (typeof params[k] === 'object' && params[k] instanceof Array) {
+                    composed += this.resolveQueryParamAsArray(k, params[k]);
+                } else {
+                    composed += `${k}=${encodeURI(params[k])}&`;
+                    composed = composed.slice(0, composed.length - 1);
+                }
             }
         });
-
-        composed = composed.slice(0, composed.length - 1);
 
         if (url[url.length - 1] === '?') {
             composed = `${url}&${composed}`;
@@ -110,6 +127,7 @@ export class GeneralService {
         }
 
         return composed;
+
     }
 
 }

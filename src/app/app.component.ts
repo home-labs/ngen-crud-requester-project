@@ -10,13 +10,13 @@ import { Services } from './services/namespace';
 })
 export class AppComponent {
 
-    collection: Array<Object>;
+    collection: object[];
 
     constructor(
         examplesService: Services.Examples
     ) {
-        examplesService.search({}).then(
-            (r: Array<Object>) => {
+        examplesService.getAll({queryParam: [1, 2, 3]}).then(
+            (r: object[]) => {
                 this.collection = r;
             }
         ).catch(
