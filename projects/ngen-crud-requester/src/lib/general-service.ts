@@ -96,7 +96,7 @@ export class GeneralService {
 
         queryParamValue.forEach(
             (value) => {
-                composed += `${queryParamName}=${encodeURI(value)}&`;
+                composed += `${queryParamName}[]=${encodeURI(value)}&`;
             }
         );
 
