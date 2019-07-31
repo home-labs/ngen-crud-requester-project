@@ -15,7 +15,7 @@ export class AppComponent {
     constructor(
         examplesService: Services.Examples
     ) {
-        examplesService.getAll({queryParam: [1, 2, 3]}).then(
+        examplesService.getAll({queryParam1: 1, queryParam2: [1, 2, 3]}).then(
             (r: object[]) => {
                 this.collection = r;
             }

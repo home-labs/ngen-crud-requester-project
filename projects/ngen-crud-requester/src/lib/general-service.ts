@@ -100,8 +100,6 @@ export class GeneralService {
             }
         );
 
-        composed = composed.slice(0, composed.length - 1);
-
         return composed;
     }
 
@@ -109,16 +107,19 @@ export class GeneralService {
 
         let composed = '';
 
-        Object.keys(params).forEach((k) => {
-            if (params[k]) {
-                if (typeof params[k] === 'object' && params[k] instanceof Array) {
-                    composed += this.resolveQueryParamAsArray(k, params[k]);
-                } else {
-                    composed += `${k}=${encodeURI(params[k])}&`;
-                    composed = composed.slice(0, composed.length - 1);
+        Object.keys(params).forEach(
+            (k) => {
+                if (params[k]) {
+                    if (typeof params[k] === 'object' && params[k] instanceof Array) {
+                        composed += `${this.resolveQueryParamAsArray(k, params[k])}`;
+                    } else {
+                        composed += `${k}=${encodeURI(params[k])}&`;
+                    }
                 }
             }
-        });
+        );
+
+        composed = composed.slice(0, composed.length - 1);
 
         if (url[url.length - 1] === '?') {
             composed = `${url}&${composed}`;
