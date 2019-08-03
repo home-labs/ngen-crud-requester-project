@@ -33,7 +33,7 @@ export class GeneralService {
         return this.postStrategyContext.send(this.resolveURL(url), data, options);
     }
 
-    // An Array is a object, so it isn't necessary specify a Array<object> as return
+    // An Array is a object, so it isn't necessary specify a object[] as return
     // more generic than parent (Response is an object)
     protected read(url: string, options?: object): Promise<object> {
         return new Promise(
