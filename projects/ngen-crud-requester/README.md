@@ -2,7 +2,7 @@
 
 ## Requirements
 
->- Angular 2 or higher.
+>- Angular 4 or higher.
 
 ## Installing
 
@@ -10,7 +10,7 @@ $ npm i ngen-crud-requester --save
 
 ## Usage
 
-Import ```NGenCRUDRequesterModule``` from ```ngen-crud-requester``` in your module, and put in the key ```imports``` of metadata from```NgModule```, so import ```NGenCRUDRequester``` in your service and inject the ```GeneralService```, like that:
+Import ```NGenCRUDRequesterModule``` from ```ngen-crud-requester``` in your module, and put in the key ```imports``` of metadata from```NgModule```, so import ```NGenCRUDRequester``` namespace in your service and extend the ```NGenCRUDRequester.GeneralService```, like that:
 
 ```typescript
 @NgModule({
@@ -29,10 +29,12 @@ import { NGenCRUDRequester } from  'ngen-crud-requester';
 
 
 @Injectable()
-class  YourService {
+class  YourService extends NGenCRUDRequester.GeneralService {
 
-    constructor(private  serviceHelp: NGenCRUDRequester.GeneralService) { }
+	
 
 }
 ```
+
+Then your service will earn the ```protected``` methods ```create```, ```read```, ```search```, ```update```, ```put``` and ```delete```.
 
