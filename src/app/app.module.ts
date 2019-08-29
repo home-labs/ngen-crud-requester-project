@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 
-// import { NGenCRUDRequesterModule } from 'projects/ngen-crud-requester/src/public_api';
 import { NGenCRUDRequesterModule } from 'ngen-crud-requester';
 
 // never use a namespace in a Angular module declaration
