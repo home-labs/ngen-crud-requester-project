@@ -7,7 +7,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "sass"
+          "style": "styl"
         }
       },
       "root": "",
@@ -28,7 +28,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.styl"
             ],
             "scripts": []
           },
@@ -88,7 +88,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.styl"
             ],
             "scripts": []
           }
@@ -123,7 +123,7 @@
     "ngen-crud-requester": {
       "projectType": "library",
       "root": "projects/ngen-crud-requester",
-      "sourceRoot": "projects/ngen-crud-requester/src",
+      "sourceRoot": "projects/ngen-crud-requester",
       "prefix": "lib",
       "architect": {
         "build": {
