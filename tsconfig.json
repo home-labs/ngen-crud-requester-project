@@ -19,11 +19,11 @@
       "dom"
     ],
     "paths": {
-      "ngen-crud-requester": [
-        "dist/ngen-crud-requester"
+      "@rplaurindo/ngen-crud-requester": [
+        "dist/@rplaurindo/ngen-crud-requester"
       ],
-      "ngen-crud-requester/*": [
-        "dist/ngen-crud-requester/*"
+      "@rplaurindo/ngen-crud-requester/*": [
+        "dist/@rplaurindo/ngen-crud-requester/*"
       ]
     }
   }

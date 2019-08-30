@@ -18,9 +18,7 @@ export class GeneralService {
 
     private putStrategyContext: Contexts.Send;
 
-    constructor(
-
-    ) {
+    constructor() {
         this.deleteStrategyContext = new Contexts.Search(injectorSingletonReference.get(Search.Delete));
         this.getStrategyContext = new Contexts.Search(injectorSingletonReference.get(Search.Get));
 
@@ -29,21 +27,25 @@ export class GeneralService {
         this.putStrategyContext = new Contexts.Send(injectorSingletonReference.get(Send.Put));
     }
 
-    protected create(url: string, data: object, options?: object): Promise<Response> {
+    protected post(url: string, data: object, options?: object): Promise<Response> {
         return this.postStrategyContext.send(this.resolveURL(url), data, options);
+    }
+
+    protected create(url: string, data: object, options?: object): Promise<Response> {
+        return this.post(url, data, options);
     }
 
     // An Array is a object, so it isn't necessary specify a object[] as return
     // more generic than parent (Response is an object)
     protected read(url: string, options?: object): Promise<object> {
         return new Promise(
-            (accomplish: (r: Response) => void, reject: (e: any) => void) => {
+            (accomplish: (r: Response) => void, reject: (reason: any) => void) => {
                 this.getStrategyContext.search(url, options).then(
                     (r: Response) => {
                         accomplish(r);
                     }
                 ).catch(
-                    e => {
+                    (e: any) => {
                         reject(e);
                     }
                 );
@@ -51,11 +53,11 @@ export class GeneralService {
         );
     }
 
-    protected search(url: string, params: object, options?: object): Promise<Array<object>> {
+    protected search(url: string, params: object, options?: object): Promise<object[]> {
         return new Promise(
-            (accomplish: (r: object[]) => void, reject: (e: any) => void) => {
+            (accomplish: (r: object[]) => void, reject: (reason: any) => void) => {
                 this.read(this.composeQueryParams(this.resolveURL(url), params), options).then(
-                        (r: Array<object> | null) => {
+                        (r: object[] | null) => {
                             if (r && typeof r === 'object') {
                                 if (r instanceof Array) {
                                     accomplish(r);
@@ -67,7 +69,7 @@ export class GeneralService {
                             }
                         }
                     ).catch(
-                        e => {
+                        (e: any) => {
                             reject(e);
                         }
                     );

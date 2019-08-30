@@ -14,7 +14,7 @@ export abstract class AbstractSearch {
 
     search(url: string, options?: object, method?: 'get' | 'delete'): Promise<Response> {
         return new Promise(
-            (accomplish: (r: Response) => void, reject: (e: any) => void) => {
+            (accomplish: (r: Response) => void, reject: (reason: any) => void) => {
                 this.http[method](url, options).subscribe(
                     (r: Response | null) => {
                         if (r) {
@@ -23,7 +23,7 @@ export abstract class AbstractSearch {
                             accomplish(null);
                         }
                     },
-                    e => {
+                    (e: any) => {
                         reject(e);
                     }
                 );

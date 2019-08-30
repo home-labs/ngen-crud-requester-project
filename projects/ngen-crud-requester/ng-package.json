@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/ngen-crud-requester",
+  "dest": "../../dist/@rplaurindo/ngen-crud-requester",
   "lib": {
     "entryFile": "index.ts"
   }

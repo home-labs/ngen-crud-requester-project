@@ -39,9 +39,9 @@ export class NGenCRUDRequesterModule {
     }
 
     constructor(
-        injector: Injector
+        private injector: Injector
     ) {
-        injectorSingletonReference = injector;
+        injectorSingletonReference = this.injector;
     }
 
 }
