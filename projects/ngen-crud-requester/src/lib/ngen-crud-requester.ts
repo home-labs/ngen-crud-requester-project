@@ -1,1 +1,2 @@
-export { GeneralService } from './general-service';
+import * as NGenCRUDRequester from './index';
+export { NGenCRUDRequester };
