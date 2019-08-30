@@ -27,12 +27,12 @@ export class GeneralService {
         this.putStrategyContext = new Contexts.Send(injectorSingletonReference.get(Send.Put));
     }
 
-    protected post(url: string, data: object, options?: object): Promise<Response> {
+    protected create(url: string, data: object, options?: object): Promise<Response> {
         return this.postStrategyContext.send(this.resolveURL(url), data, options);
     }
 
-    protected create(url: string, data: object, options?: object): Promise<Response> {
-        return this.post(url, data, options);
+    protected post(url: string, data: object, options?: object): Promise<Response | object | object[]> {
+        return this.create(url, data, options);
     }
 
     // An Array is a object, so it isn't necessary specify a object[] as return
