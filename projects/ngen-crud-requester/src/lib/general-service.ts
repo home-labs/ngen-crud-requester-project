@@ -31,7 +31,7 @@ export class GeneralService {
         return this.postStrategyContext.send(this.resolveURL(url), data, options);
     }
 
-    protected post(url: string, data: object, options?: object): Promise<Response | object | object[]> {
+    protected post(url: string, data: object, options?: object): Promise<object> {
         return this.create(url, data, options);
     }
 
