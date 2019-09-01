@@ -31,10 +31,8 @@ import { NGenCRUDRequester } from  'ngen-crud-requester';
 @Injectable()
 class  YourService extends NGenCRUDRequester.GeneralService {
 
-	
-
 }
 ```
 
-Then your service will earn the ```protected``` methods ```create```, ```read```, ```search```, ```update```, ```put``` and ```delete```.
+Then your service will earn the ```protected``` methods ```post```, ```create```, ```read```, ```search```, ```update```, ```put```, ```patch```, and ```delete```.
 
