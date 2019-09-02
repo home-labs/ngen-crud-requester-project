@@ -5,7 +5,7 @@ import { AbstractSearch } from './abstract-search';
 export class Delete extends AbstractSearch {
 
     search(url: string, options?: object): Promise<Response> {
-        return super.search(url, options, 'delete');
+        return super.search(url, options, 'delete') as Promise<Response>;
     }
 
 }
