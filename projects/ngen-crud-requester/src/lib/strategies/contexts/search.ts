@@ -8,7 +8,7 @@ export class Search {
         private strategy: AbstractSearch
     ) { }
 
-    search(url: string, options?: object): Promise<object | object[]> {
+    search(url: string, options?: object): Promise<Response> {
         return this.strategy.search(url, options);
     }
 

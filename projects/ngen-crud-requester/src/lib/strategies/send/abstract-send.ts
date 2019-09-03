@@ -10,11 +10,11 @@ export abstract class AbstractSend {
     ) { }
 
     send(url: string, data: object, options?: object, method?: 'post' | 'put' | 'patch'):
-        Promise<Response | object[]> {
+        Promise<Response> {
         return new Promise(
-            (accomplish: (r: Response | object[]) => void, reject: (reason: any) => void) => {
+            (accomplish: (r: Response) => void, reject: (reason: any) => void) => {
                 this.http[method](url, data, options).subscribe(
-                    (r: Response | object[]) => {
+                    (r: Response) => {
                         accomplish(r);
                     },
                     (e: any) => {

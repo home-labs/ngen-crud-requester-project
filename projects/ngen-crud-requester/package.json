@@ -1,6 +1,6 @@
 {
   "name": "@rplaurindo/ngen-crud-requester",
-  "version": "1.0.0-rc.5",
+  "version": "1.0.0-rc.6",
   "peerDependencies": {
     "@angular/common": ">= 5",
     "@angular/core": ">= 5"

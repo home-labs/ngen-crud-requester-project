@@ -7,7 +7,7 @@ export class Send {
         private strategy: AbstractSend
     ) { }
 
-    send(url: string, data: object, options?: object): Promise<Response | object[]> {
+    send(url: string, data: object, options?: object): Promise<Response> {
         return this.strategy.send(url, data, options);
     }
 
