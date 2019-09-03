@@ -12,11 +12,11 @@ export abstract class AbstractSearch {
         private http: HttpClient
     ) { }
 
-    search(url: string, options?: object, method?: 'get' | 'delete'): Promise<object | object[] | Response> {
+    search(url: string, options?: object, method?: 'get' | 'delete'): Promise<object | object[]> {
         return new Promise(
-            (accomplish: (r: object | object[] | Response) => void, reject: (reason: any) => void) => {
+            (accomplish: (r: object | object[]) => void, reject: (reason: any) => void) => {
                 this.http[method](url, options).subscribe(
-                    (r: object | object[] | Response) => {
+                    (r: object | object[]) => {
                         if (r) {
                             accomplish(r);
                         } else {

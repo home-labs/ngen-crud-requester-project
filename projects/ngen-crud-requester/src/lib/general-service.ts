@@ -27,21 +27,15 @@ export class GeneralService {
         this.putStrategyContext = new Contexts.Send(injectorSingletonReference.get(Send.Put));
     }
 
-    protected post(url: string, data: object, options?: object): Promise<Response | object[]> {
-        return this.postStrategyContext.send(this.resolveURL(url), data, options);
-    }
-
     protected create(url: string, data: object, options?: object): Promise<Response> {
-        return this.post(url, data, options) as Promise<Response>;
+        return this.postStrategyContext.send(this.resolveURL(url), data, options) as Promise<Response>;
     }
 
-    // An Array is a object, so it isn't necessary specify a object[] as return
-    // more generic than parent (Response is an object)
-    protected read(url: string, options?: object): Promise<object> {
+    protected read(url: string, options?: object): Promise<object | object[]> {
         return new Promise(
-            (accomplish: (r: object | object[] | Response) => void, reject: (reason: any) => void) => {
+            (accomplish: (r: object | object[]) => void, reject: (reason: any) => void) => {
                 this.getStrategyContext.search(url, options).then(
-                    (r: object | object[] | Response) => {
+                    (r: object | object[]) => {
                         accomplish(r);
                     }
                 ).catch(
@@ -54,6 +48,30 @@ export class GeneralService {
     }
 
     protected search(url: string, params: object, options?: object): Promise<object[]> {
+        return new Promise(
+            (accomplish: (r: object[] | Response) => void, reject: (reason: any) => void) => {
+                this.postStrategyContext.send(this.resolveURL(url), params, options).then(
+                    (r: object[] | Response) => {
+                        if (r && typeof r === 'object') {
+                            if (r instanceof Array) {
+                                accomplish(r);
+                            } else {
+                                accomplish([r]);
+                            }
+                        } else {
+                            accomplish(r);
+                        }
+                    }
+                ).catch(
+                    (e: any) => {
+                        reject(e);
+                    }
+                );
+            }
+        ) as Promise<object[]>;
+    }
+
+    protected searchByHTTPGetVerb(url: string, params: object, options?: object): Promise<object[]> {
         return new Promise(
             (accomplish: (r: object | object[] | Response) => void, reject: (reason: any) => void) => {
                 this.read(this.composeQueryParams(this.resolveURL(url), params), options).then(
