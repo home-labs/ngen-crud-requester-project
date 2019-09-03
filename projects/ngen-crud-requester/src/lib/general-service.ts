@@ -28,7 +28,7 @@ export class GeneralService {
     }
 
     protected create(url: string, data: object, options?: object): Promise<Response> {
-        return this.postStrategyContext.send(this.resolveURL(url), data, options) as Promise<Response>;
+        return this.postStrategyContext.send(this.resolveURL(url), data, options);
     }
 
     protected read(url: string, options?: object): Promise<object | object[]> {
@@ -97,15 +97,15 @@ export class GeneralService {
     }
 
     protected update(url: string, data: object, options?: object): Promise<Response> {
-        return this.patchStrategyContext.send(this.resolveURL(url), data, options) as Promise<Response>;
+        return this.patchStrategyContext.send(this.resolveURL(url), data, options);
     }
 
     protected put(url: string, data: object, options?: object): Promise<Response> {
-        return this.putStrategyContext.send(this.resolveURL(url), data, options) as Promise<Response>;
+        return this.putStrategyContext.send(this.resolveURL(url), data, options);
     }
 
     protected delete(url: string, options?: object): Promise<Response> {
-        return this.deleteStrategyContext.search(this.resolveURL(url), options) as Promise<Response>;
+        return this.deleteStrategyContext.search(this.resolveURL(url), options);
     }
 
     private resolveURL(url: string) {
