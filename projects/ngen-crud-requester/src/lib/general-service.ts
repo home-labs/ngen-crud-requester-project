@@ -6,52 +6,22 @@ import { Send } from './strategies/send/namespace';
 import { injectorSingletonReference } from './module';
 
 
-export class GeneralService {
+export class GeneralService<T> {
 
-    private deleteStrategyContext: Contexts.Search;
+    protected postStrategyContext: Contexts.Send;
 
-    private getStrategyContext: Contexts.Search;
-
-    private patchStrategyContext: Contexts.Send;
-
-    private postStrategyContext: Contexts.Send;
-
-    private putStrategyContext: Contexts.Send;
+    protected getStrategyContext: Contexts.Search;
 
     constructor() {
-        this.deleteStrategyContext = new Contexts.Search(injectorSingletonReference.get(Search.Delete));
-        this.getStrategyContext = new Contexts.Search(injectorSingletonReference.get(Search.Get));
-
-        this.patchStrategyContext = new Contexts.Send(injectorSingletonReference.get(Send.Patch));
         this.postStrategyContext = new Contexts.Send(injectorSingletonReference.get(Send.Post));
-        this.putStrategyContext = new Contexts.Send(injectorSingletonReference.get(Send.Put));
-    }
-
-    protected create(url: string, data: object, options?: object): Promise<Response> {
-        return this.postStrategyContext.send(this.resolveURL(url), data, options);
-    }
-
-    protected read(url: string, options?: object): Promise<object | object[]> {
-        return new Promise(
-            (accomplish: (r: object | object[]) => void, reject: (reason: any) => void) => {
-                this.getStrategyContext.search(url, options).then(
-                    (r: object | object[]) => {
-                        accomplish(r);
-                    }
-                ).catch(
-                    (e: any) => {
-                        reject(e);
-                    }
-                );
-            }
-        );
+        this.getStrategyContext = new Contexts.Search(injectorSingletonReference.get(Search.Get));
     }
 
     protected search(url: string, params: object, options?: object): Promise<Response | object[] | string | boolean> {
         return new Promise(
-            (accomplish: (r: Response | object[]) => void, reject: (reason: any) => void) => {
+            (accomplish: (r: Response | object[] | string | boolean) => void, reject: (reason: any) => void) => {
                 this.postStrategyContext.send(this.resolveURL(url), params, options).then(
-                    (r: Response) => {
+                    (r: Response | object[] | string | boolean) => {
                         if (r && typeof r === 'object') {
                             if (r instanceof Array) {
                                 accomplish(r);
@@ -72,43 +42,31 @@ export class GeneralService {
     }
 
     protected searchByHTTPGetVerb(url: string, params: object, options?: object):
-        Promise<Response | object[] | string | boolean> {
+        Promise<T[] | Response> {
         return new Promise(
-            (accomplish: (r: Response | object[]) => void, reject: (reason: any) => void) => {
-                this.read(this.composeQueryParams(this.resolveURL(url), params), options).then(
-                    (r: Response) => {
-                            if (r && typeof r === 'object') {
-                                if (r instanceof Array) {
-                                    accomplish(r);
-                                } else {
-                                    accomplish([r]);
-                                }
-                            } else {
+            (accomplish: (r: T[] | Response) => void, reject: (reason: any) => void) => {
+                this.getStrategyContext.search(this.composeQueryParams(this.resolveURL(url), params), options).then(
+                    (r: any) => {
+                        if (r && typeof r === 'object') {
+                            if (r instanceof Array) {
                                 accomplish(r);
+                            } else {
+                                accomplish([r]);
                             }
+                        } else {
+                            accomplish(r);
                         }
-                    ).catch(
-                        (e: any) => {
-                            reject(e);
-                        }
-                    );
+                    }
+                ).catch(
+                    (e: any) => {
+                        reject(e);
+                    }
+                );
             }
         );
     }
 
-    protected update(url: string, data: object, options?: object): Promise<Response> {
-        return this.patchStrategyContext.send(this.resolveURL(url), data, options);
-    }
-
-    protected put(url: string, data: object, options?: object): Promise<Response> {
-        return this.putStrategyContext.send(this.resolveURL(url), data, options);
-    }
-
-    protected delete(url: string, options?: object): Promise<Response> {
-        return this.deleteStrategyContext.search(this.resolveURL(url), options);
-    }
-
-    private resolveURL(url: string) {
+    protected resolveURL(url: string) {
         return url.trim().replace(/[\n]+/, '');
     }
 
@@ -128,28 +86,31 @@ export class GeneralService {
 
         let composed = '';
 
-        Object.keys(params).forEach(
-            (k) => {
-                if (params[k]) {
-                    if (typeof params[k] === 'object' && params[k] instanceof Array) {
-                        composed += `${this.resolveQueryParamAsArray(k, params[k])}`;
-                    } else {
-                        composed += `${k}=${encodeURI(params[k])}&`;
+        if (params) {
+            Object.keys(params).forEach(
+                (k) => {
+                    if (params[k]) {
+                        if (typeof params[k] === 'object' && params[k] instanceof Array) {
+                            composed += `${this.resolveQueryParamAsArray(k, params[k])}`;
+                        } else {
+                            composed += `${k}=${encodeURI(params[k])}&`;
+                        }
                     }
                 }
+            );
+
+            composed = composed.slice(0, composed.length - 1);
+
+            if (url[url.length - 1] === '?') {
+                composed = `${url}&${composed}`;
+            } else {
+                composed = `${url}?${composed}`;
             }
-        );
-
-        composed = composed.slice(0, composed.length - 1);
-
-        if (url[url.length - 1] === '?') {
-            composed = `${url}&${composed}`;
         } else {
-            composed = `${url}?${composed}`;
+            composed = url;
         }
 
         return composed;
-
     }
 
 }

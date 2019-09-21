@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 // import { HttpClient } from '@angular/common/http';
 
-import { NGenCRUDRequester } from '@rplaurindo/ngen-crud-requester';
+// import { NGenCRUDRequester } from '@rplaurindo/ngen-crud-requester';
+import { NGenCRUDRequester } from 'projects/ngen-crud-requester';
 
 // @Injectable()
 // class ConcreteHttpInterceptor implements HttpInterceptor {
@@ -14,7 +15,7 @@ import { NGenCRUDRequester } from '@rplaurindo/ngen-crud-requester';
 // }
 
 @Injectable()
-export class Examples extends NGenCRUDRequester.GeneralService {
+export class Examples extends NGenCRUDRequester.GeneralService<object> {
 
     // use a constructor will break the dependency injection chain
     // constructor(
@@ -46,7 +47,7 @@ export class Examples extends NGenCRUDRequester.GeneralService {
     // TypeScript doesn't support overload because Javascript haven't type, so a function declared later would overwrite the previous one
     // even if the signature is different and the parameters are optional
     getAll(options?: object): Promise<object[]> {
-        return super.read(`
+        return super.searchByHTTPGetVerb(`
             https://servicodados.ibge.gov.br/api/v1/localidades/estados
         `, options) as Promise<object[]>;
     }
