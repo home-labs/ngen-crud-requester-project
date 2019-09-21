@@ -6,7 +6,7 @@ import { injectorSingletonReference } from './module';
 import { ReadingService } from './reading-service';
 
 
-export class WritingService<T> extends ReadingService<T> {
+export class CRUDService<T> extends ReadingService<T> {
 
     private deleteStrategyContext: Contexts.Search;
 

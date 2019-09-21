@@ -1,2 +1,2 @@
 export { ReadingService } from './reading-service';
-export { WritingService } from './writing-service';
+export { CRUDService } from './crud-service';

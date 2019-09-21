@@ -15,7 +15,7 @@ import { NGenCRUDRequester } from 'projects/ngen-crud-requester';
 // }
 
 @Injectable()
-export class Examples extends NGenCRUDRequester.ReadingService<object> {
+export class Examples extends NGenCRUDRequester.CRUDService<object> {
 
     // use a constructor will break the dependency injection chain
     // constructor(
