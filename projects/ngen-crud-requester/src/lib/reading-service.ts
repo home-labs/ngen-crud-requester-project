@@ -17,9 +17,9 @@ export class ReadingService<T> {
         this.getStrategyContext = new Contexts.Search(injectorSingletonReference.get(Search.Get));
     }
 
-    protected read(url: string, options?: object): Promise<T> {
+    protected read(url: string, options?: object): Promise<T | T[]> {
         return new Promise(
-            (accomplish: (r: T) => void, reject: (reason: any) => void) => {
+            (accomplish: (r: T | T[]) => void, reject: (reason: any) => void) => {
                 this.getStrategyContext.search(url, options).then(
                     (r: any) => {
                         accomplish(r);
