@@ -1,2 +1,2 @@
-export { GeneralService } from './general-service';
-export { CRUDService } from './crud-service';
+export { ReadingService } from './reading-service';
+export { WritingService } from './writing-service';

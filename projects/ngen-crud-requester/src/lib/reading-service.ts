@@ -6,15 +6,31 @@ import { Send } from './strategies/send/namespace';
 import { injectorSingletonReference } from './module';
 
 
-export class GeneralService<T> {
+export class ReadingService<T> {
 
     protected postStrategyContext: Contexts.Send;
 
-    protected getStrategyContext: Contexts.Search;
+    private getStrategyContext: Contexts.Search;
 
     constructor() {
         this.postStrategyContext = new Contexts.Send(injectorSingletonReference.get(Send.Post));
         this.getStrategyContext = new Contexts.Search(injectorSingletonReference.get(Search.Get));
+    }
+
+    protected read(url: string, options?: object): Promise<T> {
+        return new Promise(
+            (accomplish: (r: T) => void, reject: (reason: any) => void) => {
+                this.getStrategyContext.search(url, options).then(
+                    (r: any) => {
+                        accomplish(r);
+                    }
+                ).catch(
+                    (e: any) => {
+                        reject(e);
+                    }
+                );
+            }
+        );
     }
 
     protected search(url: string, params: object, options?: object): Promise<Response | object[] | string | boolean> {

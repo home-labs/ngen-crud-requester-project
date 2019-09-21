@@ -3,10 +3,10 @@ import { Search } from './strategies/search/namespace';
 import { Send } from './strategies/send/namespace';
 
 import { injectorSingletonReference } from './module';
-import { GeneralService } from './general-service';
+import { ReadingService } from './reading-service';
 
 
-export class CRUDService<T> extends GeneralService<T> {
+export class WritingService<T> extends ReadingService<T> {
 
     private deleteStrategyContext: Contexts.Search;
 
@@ -24,22 +24,6 @@ export class CRUDService<T> extends GeneralService<T> {
 
     protected create(url: string, data: object, options?: object): Promise<Response> {
         return this.postStrategyContext.send(this.resolveURL(url), data, options);
-    }
-
-    protected read(url: string, options?: object): Promise<T> {
-        return new Promise(
-            (accomplish: (r: T) => void, reject: (reason: any) => void) => {
-                this.getStrategyContext.search(url, options).then(
-                    (r: any) => {
-                        accomplish(r);
-                    }
-                ).catch(
-                    (e: any) => {
-                        reject(e);
-                    }
-                );
-            }
-        );
     }
 
     protected update(url: string, data: object, options?: object): Promise<Response> {
