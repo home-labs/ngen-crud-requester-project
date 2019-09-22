@@ -6,11 +6,11 @@
 
 ## Installing
 
-$ npm i ngen-crud-requester --save
+$ npm i @rplaurindo/ngen-crud-requester --save
 
 ## Usage
 
-Import ```NGenCRUDRequesterModule``` from ```ngen-crud-requester``` in your module, and put in the key ```imports``` of metadata from```NgModule```, so import ```NGenCRUDRequester``` namespace in your service and extend the ```NGenCRUDRequester.AbstractCRUDService<any>```, like that:
+Import ```NGenCRUDRequesterModule``` from ```@rplaurindo/ngen-crud-requester``` in your module, and put in the key ```imports``` of metadata from```NgModule```, so import ```NGenCRUDRequester``` namespace in your service and extend the ```NGenCRUDRequester.AbstractCRUDService<any>``` class, like that:
 
 ```typescript
 @NgModule({
