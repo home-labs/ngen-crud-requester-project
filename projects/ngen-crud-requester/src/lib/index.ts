@@ -1,2 +1,2 @@
-export { ReadingService } from './reading-service';
-export { CRUDService } from './crud-service';
+export { AbstractReadingService } from './abstract-reading-service';
+export { AbstractCRUDService } from './abstract-crud-service';

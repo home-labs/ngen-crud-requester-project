@@ -3,10 +3,10 @@ import { Search } from './strategies/search/namespace';
 import { Send } from './strategies/send/namespace';
 
 import { injectorSingletonReference } from './module';
-import { ReadingService } from './reading-service';
+import { AbstractReadingService } from './abstract-reading-service';
 
 
-export class CRUDService<T> extends ReadingService<T> {
+export abstract class AbstractCRUDService<T> extends AbstractReadingService<T> {
 
     private deleteStrategyContext: Contexts.Search;
 

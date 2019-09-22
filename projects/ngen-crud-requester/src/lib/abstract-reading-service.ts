@@ -6,7 +6,7 @@ import { Send } from './strategies/send/namespace';
 import { injectorSingletonReference } from './module';
 
 
-export class ReadingService<T> {
+export abstract class AbstractReadingService<T> {
 
     protected postStrategyContext: Contexts.Send;
 
