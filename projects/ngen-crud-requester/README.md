@@ -10,7 +10,7 @@ $ npm i ngen-crud-requester --save
 
 ## Usage
 
-Import ```NGenCRUDRequesterModule``` from ```ngen-crud-requester``` in your module, and put in the key ```imports``` of metadata from```NgModule```, so import ```NGenCRUDRequester``` namespace in your service and extend the ```NGenCRUDRequester.GeneralService```, like that:
+Import ```NGenCRUDRequesterModule``` from ```ngen-crud-requester``` in your module, and put in the key ```imports``` of metadata from```NgModule```, so import ```NGenCRUDRequester``` namespace in your service and extend the ```NGenCRUDRequester.AbstractCRUDService<any>```, like that:
 
 ```typescript
 @NgModule({
@@ -25,14 +25,14 @@ export  class  YourModule { }
 ```
 
 ```typescript
-import { NGenCRUDRequester } from  'ngen-crud-requester';
+import { NGenCRUDRequester } from  '@rplaurindo/ngen-crud-requester';
 
 
 @Injectable()
-class  YourService extends NGenCRUDRequester.GeneralService {
+class  YourService extends NGenCRUDRequester.AbstractCRUDService<any> {
 
 }
 ```
 
-Then your service will earn the ```protected``` methods ```post```, ```create```, ```read```, ```search```, ```update```, ```put```, ```patch```, and ```delete```.
+Then your service will earn the ```protected``` methods ```create```, ```read```, ```search```, ```searchByHTTPGetVerb```, ```update```, ```put```, and ```delete```.
 
