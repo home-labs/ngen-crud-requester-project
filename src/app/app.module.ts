@@ -4,13 +4,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 
-// import { NGenCRUDRequesterModule } from '@rplaurindo/ngen-crud-requester';
-import { NGenCRUDRequesterModule } from 'projects/ngen-crud-requester';
+import { NGenCRUDRequesterModule } from '@rplaurindo/ngen-crud-requester';
 
 // never use a namespace in a Angular module declaration
-// import { Services } from './services/namespace';
-
-import * as Services from './services';
+import { Services } from './services/namespace';
 
 
 @NgModule({

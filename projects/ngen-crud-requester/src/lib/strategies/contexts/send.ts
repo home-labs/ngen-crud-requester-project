@@ -1,4 +1,4 @@
-import { AbstractSend } from '../send/abstract-send';
+import { AbstractSend } from '../send/index';
 
 
 export class Send {

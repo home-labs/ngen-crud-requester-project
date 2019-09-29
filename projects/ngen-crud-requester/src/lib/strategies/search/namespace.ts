@@ -1,2 +1,2 @@
-import * as Search from '../search';
+import * as Search from './index';
 export { Search };

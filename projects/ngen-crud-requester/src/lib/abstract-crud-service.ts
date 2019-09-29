@@ -1,6 +1,4 @@
-import { Contexts } from './strategies/contexts/namespace';
-import { Search } from './strategies/search/namespace';
-import { Send } from './strategies/send/namespace';
+import { Strategies } from './strategies/namespace';
 
 import { injectorSingletonReference } from './module';
 import { AbstractReadingService } from './abstract-reading-service';
@@ -8,18 +6,22 @@ import { AbstractReadingService } from './abstract-reading-service';
 
 export abstract class AbstractCRUDService<T> extends AbstractReadingService<T> {
 
-    private deleteStrategyContext: Contexts.Search;
+    private deleteStrategyContext: Strategies.Contexts.Search;
 
-    private patchStrategyContext: Contexts.Send;
+    private patchStrategyContext: Strategies.Contexts.Send;
 
-    private putStrategyContext: Contexts.Send;
+    private putStrategyContext: Strategies.Contexts.Send;
 
     constructor() {
         super();
 
-        this.deleteStrategyContext = new Contexts.Search(injectorSingletonReference.get(Search.Delete));
-        this.patchStrategyContext = new Contexts.Send(injectorSingletonReference.get(Send.Patch));
-        this.putStrategyContext = new Contexts.Send(injectorSingletonReference.get(Send.Put));
+        this.deleteStrategyContext = new Strategies.Contexts
+            .Search(injectorSingletonReference.get(Strategies.Search.Delete));
+
+        this.patchStrategyContext = new Strategies.Contexts
+            .Send(injectorSingletonReference.get(Strategies.Send.Patch));
+        this.putStrategyContext = new Strategies.Contexts
+            .Send(injectorSingletonReference.get(Strategies.Send.Put));
     }
 
     protected create(url: string, data: object, options?: object): Promise<Response> {

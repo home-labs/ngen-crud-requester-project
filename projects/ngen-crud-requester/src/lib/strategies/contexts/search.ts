@@ -1,4 +1,4 @@
-import { AbstractSearch } from '../search/abstract-search';
+import { AbstractSearch } from '../search/index';
 
 
 // Strategy Context

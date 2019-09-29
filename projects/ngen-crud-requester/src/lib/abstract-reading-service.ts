@@ -1,20 +1,19 @@
-import { Contexts } from './strategies/contexts/namespace';
-// use a namespace with two or more nested names as a property kind generated a error when the compiler was doing "build"
-import { Search } from './strategies/search/namespace';
-import { Send } from './strategies/send/namespace';
+import { Strategies } from './strategies/namespace';
 
 import { injectorSingletonReference } from './module';
 
 
 export abstract class AbstractReadingService<T> {
 
-    protected postStrategyContext: Contexts.Send;
+    protected postStrategyContext: Strategies.Contexts.Send;
 
-    private getStrategyContext: Contexts.Search;
+    private getStrategyContext: Strategies.Contexts.Search;
 
     constructor() {
-        this.postStrategyContext = new Contexts.Send(injectorSingletonReference.get(Send.Post));
-        this.getStrategyContext = new Contexts.Search(injectorSingletonReference.get(Search.Get));
+        this.postStrategyContext = new Strategies.Contexts
+            .Send(injectorSingletonReference.get(Strategies.Send.Post));
+        this.getStrategyContext = new Strategies.Contexts
+            .Search(injectorSingletonReference.get(Strategies.Search.Get));
     }
 
     protected read(url: string, options?: object): Promise<T | T[] | Response> {

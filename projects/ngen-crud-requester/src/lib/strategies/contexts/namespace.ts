@@ -1,2 +1,2 @@
-import * as Contexts from '../contexts';
+import * as Contexts from './index';
 export { Contexts };
