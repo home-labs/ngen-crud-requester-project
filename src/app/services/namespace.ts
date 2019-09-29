@@ -1,2 +1,2 @@
-import * as Services from '.';
+import * as Services from './index';
 export { Services };
