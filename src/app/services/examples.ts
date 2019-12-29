@@ -43,12 +43,11 @@ export class Examples extends NGenCRUDRequester.AbstractCRUDService<object> {
     //     `, options);
     // }
 
-    // TypeScript doesn't support overload because Javascript haven't type, so a function declared later would overwrite the previous one
-    // even if the signature is different and the parameters are optional
-    getAll(options?: object) {
+    // to overload (same name but different signature) you can use <original type> [| <... new types>]
+    read(): Promise<object> {
         return super.read(`
             https://servicodados.ibge.gov.br/api/v1/localidades/estados
-        `, options);
+        `);
     }
 
     // updateProxy(id: number, params: object, options?: object): Promise<Response> {

@@ -15,7 +15,7 @@ export class AppComponent {
     constructor(
         examplesService: Services.Examples
     ) {
-        examplesService.getAll().then(
+        examplesService.read().then(
             (r: object[]) => {
                 this.collection = r;
             }
