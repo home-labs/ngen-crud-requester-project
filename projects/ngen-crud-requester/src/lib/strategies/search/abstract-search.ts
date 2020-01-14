@@ -17,7 +17,7 @@ export abstract class AbstractSearch {
             (accomplish: (r: Response) => void, reject: (reason: any) => void) => {
                 this.http[method](url, options).subscribe(
                     (r: Response) => {
-                        if (r) {
+                        if (r || (typeof r === 'number' && r === 0)) {
                             accomplish(r);
                         } else {
                             accomplish(null);
