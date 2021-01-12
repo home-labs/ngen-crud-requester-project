@@ -2,15 +2,15 @@
 
 ## Requirements
 
->- Angular 5 or higher.
+>- @angular/common and @aAngular/core 5 or higher.
 
 ## Installing
 
-$ npm i @rplaurindo/ngen-crud-requester --save
+$ npm i @actjs.on/ngen-crud-requester --save
 
 ## Usage
 
-Import ```NGenCRUDRequesterModule``` from ```@rplaurindo/ngen-crud-requester``` in your module, and put in the key ```imports``` of metadata from```NgModule```, so import ```NGenCRUDRequester``` namespace in your service and extend the ```NGenCRUDRequester.AbstractCRUDService<any>``` class, like that:
+Import `NGenCRUDRequesterModule` from `@actjs.on/ngen-crud-requester` in your module, and put in the key `imports` of metadata from `NgModule`, so import `NGenCRUDRequester` namespace in your service and extend the `NGenCRUDRequester.AbstractCRUDService<any>` `classGeneralService`, like that:
 
 ```typescript
 @NgModule({
@@ -25,14 +25,15 @@ export  class  YourModule { }
 ```
 
 ```typescript
-import { NGenCRUDRequester } from  '@rplaurindo/ngen-crud-requester';
+import { NGenCRUDRequester } from  '@actjs.on/ngen-crud-requester';
 
 
 @Injectable()
-class  YourService extends NGenCRUDRequester.AbstractCRUDService<any> {
+class  YourService extends NGenCRUDRequester.AbstractCRUDService<any> {GeneralService {
+
+	
 
 }
 ```
 
-Then your service will earn the ```protected``` methods ```create```, ```read```, ```search```, ```searchByHTTPGetVerb```, ```update```, ```put```, and ```delete```.
-
+Then your service will earn the `protected` methods `create`, `read`, `search`, `searchByHTTPGetVerb`, `update`, `put`, and `delete`.
