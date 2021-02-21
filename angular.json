@@ -133,14 +133,14 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ngen-crud-requester/tsconfig.lib.json",
             "project": "projects/ngen-crud-requester/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/ng-web-compack/tsconfig.lib.prod.json"
+              "tsConfig": "projects/ngen-crud-requester/tsconfig.lib.prod.json"
             }
           }
         },

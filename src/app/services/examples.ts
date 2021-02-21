@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 // import { HttpClient } from '@angular/common/http';
 
-// import { NGenCRUDRequester } from '@actjs.on/ngen-crud-requester';
-import { NGenCRUDRequester } from 'projects/ngen-crud-requester/ngen-crud-requester';
+import { NGenCRUDRequester } from '@actjs.on/ngen-crud-requester';
+// import { NGenCRUDRequester } from 'projects/ngen-crud-requester/ngen-crud-requester';
 
 // @Injectable()
 // class ConcreteHttpInterceptor implements HttpInterceptor {

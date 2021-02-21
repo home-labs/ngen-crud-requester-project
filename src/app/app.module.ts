@@ -4,8 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 
-// import { NGenCRUDRequesterModule } from '@actjs.on/ngen-crud-requester';
-import { NGenCRUDRequesterModule } from 'projects/ngen-crud-requester/ngen-crud-requester';
+import { NGenCRUDRequesterModule } from '@actjs.on/ngen-crud-requester';
+// import { NGenCRUDRequesterModule } from 'projects/ngen-crud-requester/ngen-crud-requester';
 
 // never use a namespace in a Angular module declaration
 import { Services } from './services/index';
