@@ -97,19 +97,22 @@ export abstract class AbstractReadingService<T> {
         return composed;
     }
 
-    private composeQueryParams(url: string, params: object): string {
+    private filter2HaveOnlyValidValues() {
+
+    }
+
+    private composeQueryParams(url: string, params?: object): string {
 
         let composed = '';
 
         if (params) {
-            Object.keys(params).forEach(
+            Object.keys(params as object).forEach(
                 (k) => {
-                    debugger
-                    if (params[k]) {
-                        if (typeof params[k] === 'object' && params[k] instanceof Array) {
-                            composed += `${this.resolveQueryParamAsArray(k, params[k])}`;
+                    if ((params as any)[k]) {
+                        if (typeof (params as any)[k] === 'object' && (params as any)[k] instanceof Array) {
+                            composed += `${this.resolveQueryParamAsArray(k, (params as any)[k])}`;
                         } else {
-                            composed += `${k}=${encodeURI(params[k])}&`;
+                            composed += `${k}=${encodeURI((params as any)[k])}&`;
                         }
                     }
                 }
