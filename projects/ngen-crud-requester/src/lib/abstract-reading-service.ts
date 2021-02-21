@@ -1,4 +1,4 @@
-import { Strategies } from './strategies/namespace';
+import { Strategies } from './strategies/index';
 
 import { injectorSingletonReference } from './module';
 
@@ -104,6 +104,7 @@ export abstract class AbstractReadingService<T> {
         if (params) {
             Object.keys(params).forEach(
                 (k) => {
+                    debugger
                     if (params[k]) {
                         if (typeof params[k] === 'object' && params[k] instanceof Array) {
                             composed += `${this.resolveQueryParamAsArray(k, params[k])}`;

@@ -8,6 +8,9 @@
       "schematics": {
         "@schematics/angular:component": {
           "style": "styl"
+        },
+        "@schematics/angular:application": {
+          "strict": true
         }
       },
       "root": "",
@@ -22,7 +25,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -43,9 +46,7 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -54,6 +55,11 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
                 }
               ]
             }
@@ -131,6 +137,11 @@
           "options": {
             "tsConfig": "projects/ngen-crud-requester/tsconfig.lib.json",
             "project": "projects/ngen-crud-requester/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng-web-compack/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -154,6 +165,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ngen-crud-requester-project"
+    }
+  },
+  "defaultProject": "ngen-crud-requester-project",
+  "cli": {
+    "analytics": "081005c9-14bc-4294-b5d6-8e6b111d656e"
+  }
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Services } from './services/namespace';
+import { Services } from './services/index';
 
 
 @Component({
@@ -15,9 +15,11 @@ export class AppComponent {
     constructor(
         examplesService: Services.Examples
     ) {
+        this.collection = [];
+
         examplesService.read().then(
-            (r: object[]) => {
-                this.collection = r;
+            (r: object) => {
+                this.collection = r as object[];
             }
         ).catch(
             (e) => {

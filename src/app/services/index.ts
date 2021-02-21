@@ -1,1 +1,1 @@
-export { Examples } from './examples';
+export * from './services';

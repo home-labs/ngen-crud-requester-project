@@ -25,7 +25,7 @@ import { Delete } from './strategies/search/delete';
 })
 export class NGenCRUDRequesterModule {
 
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<NGenCRUDRequesterModule> {
         return {
             ngModule: NGenCRUDRequesterModule
             , providers: [

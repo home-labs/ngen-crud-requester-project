@@ -1,4 +1,4 @@
-import { Strategies } from './strategies/namespace';
+import { Strategies } from './strategies/index';
 
 import { injectorSingletonReference } from './module';
 import { AbstractReadingService } from './abstract-reading-service';
