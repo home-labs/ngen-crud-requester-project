@@ -10,12 +10,12 @@ import { Services } from './services/index';
 })
 export class AppComponent {
 
-    collection: object[];
+    collection!: object[];
 
     constructor(
         examplesService: Services.Examples
     ) {
-        this.collection = [];
+        // this.collection = [];
 
         examplesService.read().then(
             (r: object) => {
