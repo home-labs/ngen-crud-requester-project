@@ -15,8 +15,6 @@ export class AppComponent {
     constructor(
         examplesService: Services.Examples
     ) {
-        // this.collection = [];
-
         examplesService.read().then(
             (r: object) => {
                 this.collection = r as object[];
