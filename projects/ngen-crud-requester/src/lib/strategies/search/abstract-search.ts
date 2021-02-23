@@ -15,12 +15,12 @@ export abstract class AbstractSearch {
     search(url: string, options?: object, method?: 'get' | 'delete'): Promise<Response> {
         return new Promise(
             (accomplish: (r: Response) => void, reject: (reason: any) => void) => {
-                this.http[method as 'get' | 'delete'](url, options).subscribe(
+                this.http[(method)!](url, options).subscribe(
                     (r: Object) => {
                         if (r || (typeof r === 'number' && r === 0)) {
                             accomplish(r as Response);
                         } else {
-                            accomplish(null as any);
+                            accomplish((null)!);
                         }
                     },
                     (e: any) => {

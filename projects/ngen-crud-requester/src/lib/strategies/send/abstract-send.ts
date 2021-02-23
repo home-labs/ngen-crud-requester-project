@@ -13,7 +13,7 @@ export abstract class AbstractSend {
         Promise<Response> {
         return new Promise(
             (accomplish: (r: Response) => void, reject: (reason: any) => void) => {
-                this.http[method as 'post' | 'put' | 'patch'](url, data, options).subscribe(
+                this.http[(method)!](url, data, options).subscribe(
                     (r: object) => {
                         accomplish(r as Response);
                     },

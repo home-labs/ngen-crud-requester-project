@@ -106,7 +106,7 @@ export abstract class AbstractReadingService<T> {
         let composed = '';
 
         if (params) {
-            Object.keys(params as object).forEach(
+            Object.keys((params)!).forEach(
                 (k) => {
                     if ((params as any)[k]) {
                         if (typeof (params as any)[k] === 'object' && (params as any)[k] instanceof Array) {
