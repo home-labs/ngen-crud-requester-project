@@ -20,7 +20,7 @@ import { Delete } from './strategies/search/delete';
         HttpClientModule
     ],
     exports: [
-
+        HttpClientModule
     ]
 })
 export class NGenCRUDRequesterModule {

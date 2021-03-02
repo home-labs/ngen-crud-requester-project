@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 
@@ -14,7 +13,6 @@ import { Services } from './services/index';
 @NgModule({
     imports: [
         BrowserModule,
-        HttpClientModule,
         NGenCRUDRequesterModule.forRoot()
     ],
     declarations: [
