@@ -60,7 +60,7 @@ export abstract class AbstractReadingService<T> {
         Promise<T[] | Response> {
         return new Promise(
             (accomplish: (r: T[] | Response) => void, reject: (reason: any) => void) => {
-                this.getStrategyContext.search(this.composeQueryParams(this.resolveURL(url), params), options).then(
+                this.getStrategyContext.search(this.decorateQueryParams(this.resolveURL(url), params), options).then(
                     (r: any) => {
                         if (r && typeof r === 'object') {
                             if (r instanceof Array) {
@@ -101,7 +101,7 @@ export abstract class AbstractReadingService<T> {
 
     }
 
-    private composeQueryParams(url: string, params?: object): string {
+    private decorateQueryParams(url: string, params?: object): string {
 
         let composed = '';
 
